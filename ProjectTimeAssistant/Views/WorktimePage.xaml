@@ -1,0 +1,47 @@
+﻿<Page
+    x:Class="ProjectTimeAssistant.Views.WorktimePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ProjectTimeAssistant.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:models="using:ProjectTimeAssistant.Models"
+    xmlns:vm="using:ProjectTimeAssistant.ViewModels"
+    xmlns:usercontrols="using:ProjectTimeAssistant.Views"
+    mc:Ignorable="d">
+
+    <Grid Margin="75,10,10,10" Canvas.ZIndex="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="180"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition MaxHeight="500"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+            <!--profilestamp-->
+        <usercontrols:ProfileUserControl Grid.Row="0"/>
+
+        <ListView Width="800" MaxHeight="500" SelectionMode="Single" HorizontalAlignment="Left" VerticalAlignment="Center" ItemsSource="{x:Bind WIssues}" Grid.Row="2">
+
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:IssueWorktime" >
+                    <Grid Margin="0,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{x:Bind Tracker}" Style="{ThemeResource SubtitleTextBlockStyle}" VerticalAlignment="Center" Grid.Column="0"/>
+                        <TextBlock Text="{x:Bind Project}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="Blue" MaxLines="1" VerticalAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Text="{x:Bind Subject}" Style="{ThemeResource BodyTextBlockStyle}" Opacity=".6" MaxLines="1" VerticalAlignment="Center" Grid.Column="2"/>
+                        <TextBlock Text="{x:Bind StartTime}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="Blue" MaxLines="1" VerticalAlignment="Center" Grid.Column="3"/>
+                        <TextBlock Text="{x:Bind FinishTime}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="Blue" MaxLines="1" VerticalAlignment="Center" Grid.Column="4"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
