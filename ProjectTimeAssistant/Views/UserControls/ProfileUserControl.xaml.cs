@@ -1,4 +1,4 @@
-﻿using ProjectTimeAssistant.Model;
+﻿using ProjectTimeAssistant.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace ProjectTimeAssistant.Views
+namespace ProjectTimeAssistant.Views.UserControls
 {
     public sealed partial class ProfileUserControl : UserControl
     {
@@ -25,7 +25,7 @@ namespace ProjectTimeAssistant.Views
         public ProfileUserControl()
         {
             this.InitializeComponent();
-            profile = new Model.Profile() { Name = "Gáspár Vilmos", Url = "onlab.m.redmine.org" };
+            profile = Services.SettingsServices.SettingsService.Instance.Profile;
         }
     }
 }

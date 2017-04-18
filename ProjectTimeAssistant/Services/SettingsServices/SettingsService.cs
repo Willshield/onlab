@@ -12,6 +12,9 @@ namespace ProjectTimeAssistant.Services.SettingsServices
         private SettingsService()
         {
             _helper = new Template10.Services.SettingsService.SettingsHelper();
+
+            //todo: load it
+            Profile = new Models.Profile() { Name = "Gáspár Vilmos", Url = "onlab.m.redmine.org" };
         }
 
         public bool UseShellBackButton
@@ -73,6 +76,10 @@ namespace ProjectTimeAssistant.Services.SettingsServices
                 Views.Shell.HamburgerMenu.IsFullScreen = value;
             }
         }
+
+        public Models.Profile Profile { get; set; }
+
+
     }
 }
 

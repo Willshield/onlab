@@ -1,4 +1,4 @@
-﻿using ProjectTimeAssistant.Model;
+﻿using ProjectTimeAssistant.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,16 +29,17 @@ namespace ProjectTimeAssistant.Views
         public IssuesDetailsPage()
         {
             this.InitializeComponent();
-            NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
+            //NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
 
-            Issues = new List<Issue>
-            {
-                new Issue { Tracker = "Feature xy", Project = "ultimate project", Subject = "Documentation", Description = "Paperstuff" },
-                new Issue { Tracker = "Loginthingz", Project = "webkit", Subject = "Bugfix", Description = "Users can't login in some cases" },
-                new Issue { Tracker = "Easyuse", Project = "trackingapp", Subject = "Feature", Description = "Stuff making easier the app usage" },
-                new Issue { Tracker = "Otherthing", Project = "webkit", Subject = "Feature", Description = "Long description, very very very very very very very very very very very loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong... And there's more: Long description, very very very very very very very very very very very loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong... And there's more: Long description, very very very very very very very very very very very loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong... And there's more: Long description, very very very very very very very very very very very loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong" } };
+            //Issues = new List<Issue>
+            //{
+            //    new Issue { Tracker = "Feature xy", Project = "ultimate project", Subject = "Documentation", Description = "Paperstuff" },
+            //    new Issue { Tracker = "Loginthingz", Project = "webkit", Subject = "Bugfix", Description = "Users can't login in some cases" },
+            //    new Issue { Tracker = "Easyuse", Project = "trackingapp", Subject = "Feature", Description = "Stuff making easier the app usage" },
+            //    new Issue { Tracker = "Otherthing", Project = "webkit", Subject = "Feature", Description = "Long description, very very very very very very very very very very very loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong... And there's more: Long description, very very very very very very very very very very very loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong... And there's more: Long description, very very very very very very very very very very very loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong... And there's more: Long description, very very very very very very very very very very very loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong" } };
 
-            profile = new Model.Profile() { Name = "Gáspár Vilmos", Url = "onlab.m.redmine.org" };
+            
+            //profile = new Model.Profile() { Name = "Gáspár Vilmos", Url = "onlab.m.redmine.org" };
         }
     }
 }

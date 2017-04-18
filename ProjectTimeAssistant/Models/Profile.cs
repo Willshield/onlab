@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectTimeAssistant.Model
+namespace ProjectTimeAssistant.Models
 {
-    class Profile
+    public class Profile
     {
         private string name;
 

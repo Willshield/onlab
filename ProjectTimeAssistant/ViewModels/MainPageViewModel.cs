@@ -5,57 +5,76 @@ using System.Linq;
 using System.Threading.Tasks;
 using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
+using ProjectTimeAssistant.Services.Network;
 
 namespace ProjectTimeAssistant.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
+        private string testText;
+
+        public string TestText
+        {
+            get { return testText; }
+            set { Set(ref testText, value); }
+        }
+
+
         public MainPageViewModel()
         {
-            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
-            {
-                Value = "Designtime value";
-            }
+            //if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            //{ 
+            //}
+            getData();
+
         }
 
-        string _Value = "Gas";
-        public string Value { get { return _Value; } set { Set(ref _Value, value); } }
-
-        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
+        private async void  getData()
         {
-            if (suspensionState.Any())
-            {
-                Value = suspensionState[nameof(Value)]?.ToString();
-            }
-            await Task.CompletedTask;
+
+            RedmineService networkService = new RedmineService();
+            IssueContainer container = await networkService.GetIssuesAsync();
+            TestText = container.issues[0].tracker.name;
         }
 
-        public override async Task OnNavigatedFromAsync(IDictionary<string, object> suspensionState, bool suspending)
-        {
-            if (suspending)
-            {
-                suspensionState[nameof(Value)] = Value;
-            }
-            await Task.CompletedTask;
-        }
+        //string _Value = "Gas";
+        //public string Value { get { return _Value; } set { Set(ref _Value, value); } }
 
-        public override async Task OnNavigatingFromAsync(NavigatingEventArgs args)
-        {
-            args.Cancel = false;
-            await Task.CompletedTask;
-        }
+        //public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> suspensionState)
+        //{
+        //    if (suspensionState.Any())
+        //    {
+        //        Value = suspensionState[nameof(Value)]?.ToString();
+        //    }
+        //    await Task.CompletedTask;
+        //}
 
-        public void GotoDetailsPage() =>
-            NavigationService.Navigate(typeof(Views.DetailPage), Value);
+        //public override async Task OnNavigatedFromAsync(IDictionary<string, object> suspensionState, bool suspending)
+        //{
+        //    if (suspending)
+        //    {
+        //        suspensionState[nameof(Value)] = Value;
+        //    }
+        //    await Task.CompletedTask;
+        //}
 
-        public void GotoSettings() =>
-            NavigationService.Navigate(typeof(Views.SettingsPage), 0);
+        //public override async Task OnNavigatingFromAsync(NavigatingEventArgs args)
+        //{
+        //    args.Cancel = false;
+        //    await Task.CompletedTask;
+        //}
 
-        public void GotoPrivacy() =>
-            NavigationService.Navigate(typeof(Views.SettingsPage), 1);
+        //public void GotoDetailsPage() =>
+        //    NavigationService.Navigate(typeof(Views.DetailPage), Value);
 
-        public void GotoAbout() =>
-            NavigationService.Navigate(typeof(Views.SettingsPage), 2);
+        //public void GotoSettings() =>
+        //    NavigationService.Navigate(typeof(Views.SettingsPage), 0);
+
+        //public void GotoPrivacy() =>
+        //    NavigationService.Navigate(typeof(Views.SettingsPage), 1);
+
+        //public void GotoAbout() =>
+        //    NavigationService.Navigate(typeof(Views.SettingsPage), 2);
 
     }
 }

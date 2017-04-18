@@ -6,17 +6,21 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:models="using:ProjectTimeAssistant.Model"
-    xmlns:usercontrols="using:ProjectTimeAssistant.Views"
+    xmlns:models="using:ProjectTimeAssistant.Models"
+    xmlns:usercontrols="using:ProjectTimeAssistant.Views.UserControls"
     xmlns:vm="using:ProjectTimeAssistant.ViewModels"
     mc:Ignorable="d">
 
+    <Page.DataContext>
+        <vm:IssuesDetailsPageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid Margin="75,10,10,10" Canvas.ZIndex="1">
+        <Grid Margin="75,5,5,5" Canvas.ZIndex="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="180"/>
+                <RowDefinition Height="150"/>
                 <RowDefinition Height="50"/>
-                <RowDefinition MaxHeight="500"/>
+                <RowDefinition MaxHeight="700"/>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
 
@@ -25,7 +29,7 @@
             
 
             <!--table header-->
-            <Grid Grid.Row="1" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" HorizontalAlignment="Left">
+            <Grid Margin="0" Grid.Row="1" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" HorizontalAlignment="Left">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30"/>
                     <ColumnDefinition Width="190"/>
@@ -47,7 +51,7 @@
 
             <!--masterdetails-->
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="2">
-                <controls:MasterDetailsView ItemsSource="{x:Bind Issues}"
+                <controls:MasterDetailsView ItemsSource="{Binding List}"
                                     NoSelectionContent="Select an item to view"
                                     Foreground="Black" MasterPaneWidth="500">
                     <controls:MasterDetailsView.ItemTemplate>
@@ -85,8 +89,8 @@
                                     <TextBlock Text="{Binding Priority}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="15" VerticalAlignment="Center"  Margin="10,0,0,0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Grid.Row="2">
-                                    <TextBlock Text="Due date:" Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" Opacity=".6" MaxLines="1" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding DueDate}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="15" VerticalAlignment="Center"  Margin="10,0,0,0"/>
+                                    <TextBlock Text="Updated:" Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" Opacity=".6" MaxLines="1" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Updated}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="15" VerticalAlignment="Center"  Margin="10,0,0,0"/>
                                 </StackPanel>
                                 <TextBlock Text="Description" Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" Opacity=".6" MaxLines="1" VerticalAlignment="Center" Grid.Row="3"/>
                                 <ScrollViewer VerticalScrollMode="Enabled" HorizontalScrollMode="Disabled" Height="100" Grid.Row="4">
@@ -141,18 +145,9 @@
             </Grid>
 
             <!--footer-->
+            <usercontrols:PushPullUserControl VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="3"/>
+            <Button Content="Refresh" VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding RefreshCommand}" Grid.Row="3"/>
 
-            <Button Width="150" Height="32" Padding="0"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="3" Margin="0,20,20,20" >
-                <Grid Width="150" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Left"  >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="32" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <SymbolIcon Grid.Column="0" Symbol="Sync" Foreground="White" />
-                    <TextBlock Grid.Column="1" Text="Sync worktimes" FontSize="16" VerticalAlignment="Center"  Foreground="{ThemeResource ApplicationForegroundThemeBrush}" />
-                </Grid>
-            </Button>
-            
         </Grid>
     </Grid>
 </Page>

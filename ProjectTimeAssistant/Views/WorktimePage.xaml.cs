@@ -1,7 +1,7 @@
-﻿using ProjectTimeAssistant.Model;
-using ProjectTimeAssistant.Models;
+﻿using ProjectTimeAssistant.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -27,7 +27,7 @@ namespace ProjectTimeAssistant.Views
 
         List<IssueWorktime> WIssues;
         Profile profile;
-
+        ObservableCollection<string> OrderingCats;
 
         public WorktimePage()
         {
@@ -54,8 +54,19 @@ namespace ProjectTimeAssistant.Views
 
             };
 
-            profile = new Model.Profile() { Name = "Gáspár Vilmos", Url = "onlab.m.redmine.org" };
+            //profile = new Models.Profile() { Name = "Gáspár Vilmos", Url = "onlab.m.redmine.org" };
 
+            OrderingCats = new ObservableCollection<string>
+            {
+                "Issue name", "Project", "Subject", "Recent", "Working hours"
+            };
+
+            string asd = OrderingCats[0];
+        }
+
+        private void selectChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ViewModel.Order();
         }
     }
 }

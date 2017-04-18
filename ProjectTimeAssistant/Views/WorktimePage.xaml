@@ -8,12 +8,17 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:models="using:ProjectTimeAssistant.Models"
     xmlns:vm="using:ProjectTimeAssistant.ViewModels"
-    xmlns:usercontrols="using:ProjectTimeAssistant.Views"
+    xmlns:usercontrols="using:ProjectTimeAssistant.Views.UserControls"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     mc:Ignorable="d">
 
-    <Grid Margin="75,10,10,10" Canvas.ZIndex="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.DataContext>
+        <vm:WorkTimePageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
+
+    <Grid Margin="75,5,5,5" Canvas.ZIndex="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="180"/>
+            <RowDefinition Height="150"/>
             <RowDefinition Height="50"/>
             <RowDefinition MaxHeight="500"/>
             <RowDefinition Height="100"/>
@@ -22,11 +27,37 @@
             <!--profilestamp-->
         <usercontrols:ProfileUserControl Grid.Row="0"/>
 
-        <ListView Width="800" MaxHeight="500" SelectionMode="Single" HorizontalAlignment="Left" VerticalAlignment="Center" ItemsSource="{x:Bind WIssues}" Grid.Row="2">
+        <ComboBox x:Name="OrderByCombo" Grid.Row="0" Header="Order by:" Width="296" Height="70" SelectionChanged="selectChanged" SelectedIndex="{Binding SelectedItem}" ItemsSource="{x:Bind OrderingCats}" VerticalAlignment="Center"/>
+
+        <!--SelectionChanged="{Binding OrderCommand}"-->
+        
+        <!--table header-->
+        <Grid  Margin="0" Grid.Row="1" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" HorizontalAlignment="Left">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="190"/>
+                <ColumnDefinition Width="145"/>
+                <ColumnDefinition Width="145"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="240"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Tracker" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="24" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBlock Text="Project" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="24" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBlock Text="Subject" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="24" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBlock Text="Work started" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="24" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBlock Text="Work ended" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="24" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        </Grid>
+
+        <ListView Width="900" MaxHeight="500" SelectionMode="Single" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding List}" Grid.Row="2">
 
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:IssueWorktime" >
-                    <Grid Margin="0,0,0,0">
+                    <Grid Margin="0,0,0,0" Height="20">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="200"/>
                             <ColumnDefinition Width="150"/>
@@ -34,14 +65,26 @@
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="150"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{x:Bind Tracker}" Style="{ThemeResource SubtitleTextBlockStyle}" VerticalAlignment="Center" Grid.Column="0"/>
-                        <TextBlock Text="{x:Bind Project}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="Blue" MaxLines="1" VerticalAlignment="Center" Grid.Column="1"/>
-                        <TextBlock Text="{x:Bind Subject}" Style="{ThemeResource BodyTextBlockStyle}" Opacity=".6" MaxLines="1" VerticalAlignment="Center" Grid.Column="2"/>
-                        <TextBlock Text="{x:Bind StartTime}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="Blue" MaxLines="1" VerticalAlignment="Center" Grid.Column="3"/>
-                        <TextBlock Text="{x:Bind FinishTime}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="Blue" MaxLines="1" VerticalAlignment="Center" Grid.Column="4"/>
+                        <TextBlock Text="{x:Bind Tracker}"     Foreground="{ThemeResource ApplicationForegroundThemeBrush}"    VerticalAlignment="Center" FontSize="12" Grid.Column="0" />
+                        <TextBlock Text="{x:Bind Project}"     Foreground="Blue" MaxLines="1"                                  VerticalAlignment="Center" FontSize="12" Grid.Column="1"/>
+                        <TextBlock Text="{x:Bind Subject}"     Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Opacity=".6" MaxLines="1"      VerticalAlignment="Center" FontSize="12" Grid.Column="2"/>
+                        <TextBlock Text="{x:Bind StartTime}"   Foreground="Blue" MaxLines="1"                                  VerticalAlignment="Center" FontSize="12" Grid.Column="3"/>
+                        <TextBlock Text="{x:Bind FinishTime}"  Foreground="Blue" MaxLines="1"                                  VerticalAlignment="Center" FontSize="12" Grid.Column="4"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Height" Value="20" />
+                    <!--<Setter Property="Margin" Value="-5,-3.7,-5,-3.7"/>-->
+                    <Setter Property="MinHeight" Value="20"/>
+                </Style>
+            </ListView.ItemContainerStyle>
         </ListView>
+
+        <!--footer-->
+        <usercontrols:PushPullUserControl VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="3"/>
+        <Button Content="Refresh" VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding RefreshCommand}" Grid.Row="3"/>
+
     </Grid>
 </Page>
