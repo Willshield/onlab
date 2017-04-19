@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProjectTimeAssistant.Models
 {
-    class Issue
+    public class Issue
     {
-        private int id;
-        public int ID
-        {
-            get { return id; }
-        }
+        public int IssueID { get; set; }
 
         private string tracker;
         public string Tracker
@@ -22,12 +18,12 @@ namespace ProjectTimeAssistant.Models
             set { tracker = value; }
         }
 
-        private string project;
-        public string Project
-        {
-            get { return project; }
-            set { project = value; }
-        }
+        //private string project;
+        //public string Project
+        //{
+        //    get { return project; }
+        //    set { project = value; }
+        //}
 
         private string subject;
         public string Subject
@@ -51,30 +47,30 @@ namespace ProjectTimeAssistant.Models
         }
 
         //kapcsolat
-        private List<WorkTime> worklist;
-        public Issue()
-        {
-            //TODO: Init params
+        public List<WorkTime> WorkTimes { get; set; }
+        //public Issue()
+        //{
+        //    //TODO: Init params
 
-            //worklist = new List<WorkTime>();
-        }
+        //    //worklist = new List<WorkTime>();
+        //}
 
-        public Issue(int id, string tracker, string project, string subject, string description)
-        {
-            this.id = id;
-            this.Tracker = tracker;
-            this.Project = project;
-            this.Subject = subject;
-            this.Description = description;
+        //public Issue(int id, string tracker, string project, string subject, string description)
+        //{
+        //    this.IssueID = id;
+        //    this.Tracker = tracker;
+        //    this.Project = project;
+        //    this.Subject = subject;
+        //    this.Description = description;
 
-            //worklist = new List<WorkTime>();
-        }
+        //    //worklist = new List<WorkTime>();
+        //}
 
-        //TODO:
-        public string AllWorkingTime
-        {
-            get { return "No tracked time"; }
-        }
+        ////TODO:
+        //public string AllWorkingTime
+        //{
+        //    get { return "No tracked time"; }
+        //}
 
         public string Priority
         {
@@ -90,6 +86,11 @@ namespace ProjectTimeAssistant.Models
             //TODO: validation
             set;
         }
+
+        //Navigation
+        public int ProjectID { get; set; }
+        public Project Project { get; set; }
+
 
         //public void addWorktime(WorkTime wt)
         //{

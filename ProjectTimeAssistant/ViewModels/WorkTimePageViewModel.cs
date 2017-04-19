@@ -65,7 +65,7 @@ namespace ProjectTimeAssistant.ViewModels
         }
         public void Refresh()
         {
-            List = new ObservableCollection<IssueWorktime>(DataSource.Instance.WorktimeList);
+            List = new ObservableCollection<IssueWorktime>(DataSource.Instance.IssueWorktimeList);
         }
     }
 }

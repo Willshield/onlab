@@ -11,6 +11,6 @@ namespace ProjectTimeAssistant.Services.DataService
     {
         Task<List<Issue>> GetIssues();
         Task<List<Project>> GetProjects();
-        Task<List<IssueWorktime>> GetTimeEntries();
+        Task<List<IssueWorktime>> GetIssueTimeEntries();
     }
 }

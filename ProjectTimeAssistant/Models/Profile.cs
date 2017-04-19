@@ -8,22 +8,8 @@ namespace ProjectTimeAssistant.Models
 {
     public class Profile
     {
-        private string name;
-
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-
-        private string url;
-
-        public string Url
-        {
-            get { return url; }
-            set { url = value; }
-        }
-
-
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Url { get; set; }
     }
 }

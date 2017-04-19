@@ -8,6 +8,8 @@ using System;
 using System.Linq;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
+using ProjectTimeAssistant.Services.DataBase;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjectTimeAssistant
 {
@@ -34,6 +36,11 @@ namespace ProjectTimeAssistant
             AutoExtendExecutionSession = true;
 
             #endregion
+
+            using (var db = new DataContext())
+            {
+                db.Database.Migrate();
+            }
         }
 
         public override UIElement CreateRootElement(IActivatedEventArgs e)

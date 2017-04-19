@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace ProjectTimeAssistant.Models
 {
-    class Project
+    public class Project
     {
 
-        private Guid id;
-        public Guid ID
-        {
-            get { return id; }
-        }
+        public int ProjectID { get; set; }
 
         private string name;
         public string Name
@@ -28,36 +24,33 @@ namespace ProjectTimeAssistant.Models
             set { description = value; }
         }
 
-        //TODO: check issues if dirty?
-        private bool dirty;
-        public bool Dirty
-        {
-            get { return dirty; }
-            set { dirty = value; }
-        }
+        ////TODO: check issues if dirty?
+        //private bool dirty;
+        //public bool Dirty
+        //{
+        //    get { return dirty; }
+        //    set { dirty = value; }
+        //}
 
-        private List<Issue> issuelist;
+        public List<Issue> Issues { get; set; }
 
-        public Project()
-        {
-            //id = new Guid("dddd-dddd");
-            id = Guid.NewGuid();
+        //public Project()
+        //{
+        //    //TODO: Init params
 
-            //TODO: Init params
-
-            issuelist = new List<Issue>();
-        }
+        //    issuelist = new List<Issue>();
+        //}
 
         //TODO
-        public void addWorktime(Issue issue)
-        {
-            issuelist.Add(issue);
-        }
+        //public void addWorktime(Issue issue)
+        //{
+        //    issuelist.Add(issue);
+        //}
 
-        public void clearWorktime()
-        {
-            issuelist.Clear();
-        }
+        //public void clearWorktime()
+        //{
+        //    issuelist.Clear();
+        //}
 
     }
 }
