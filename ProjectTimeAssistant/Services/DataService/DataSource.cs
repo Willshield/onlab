@@ -41,17 +41,8 @@ namespace ProjectTimeAssistant.Services.DataService
         }
 
         List<Issue> issueList;
-        //public List<Issue> IssueList { get { return issueList; } private set { issueList = value; } }
         List<Project> projectList;
-        //public List<Project> ProjectList { get { return projectList; } private set { projectList = value; } }
         List<WorkTime> worktimeList;
-        //public List<WorkTime> WorktimeList { get { return worktimeList; } private set { worktimeList = value; } }
-
-
-        //for UI
-        List<IssueWorktime> iworktimeList;
-        public List<IssueWorktime> IssueWorktimeList { get { return iworktimeList; } private set { iworktimeList = value; } }
-
 
         public async void PullAll()
         {
@@ -69,7 +60,6 @@ namespace ProjectTimeAssistant.Services.DataService
             projectList = await dataConverter.GetProjects();
             issueList = await dataConverter.GetIssues();
             worktimeList = await dataConverter.GetTimeEntries();
-            //worktimeList = await dataConverter.GetTimeEntries();
         }
 
         private void PullProjects(DataContext db)
@@ -127,7 +117,7 @@ namespace ProjectTimeAssistant.Services.DataService
         {
             foreach (var timeEntry in worktimeList)
             {
-                var exists = db.WorkTimes.Where(w => w.IssueID == timeEntry.IssueID).SingleOrDefault();
+                var exists = db.WorkTimes.Where(w => w.WorkTimeID == timeEntry.WorkTimeID).SingleOrDefault();
                 if (exists is null)
                 {
                     db.WorkTimes.Add(timeEntry);
@@ -163,7 +153,7 @@ namespace ProjectTimeAssistant.Services.DataService
         {
             using (var db = new DataContext())
             {
-                var wts = new ObservableCollection<WorkTime>(db.WorkTimes.Include(wt => wt.Issue).ToList());
+                var wts = new ObservableCollection<WorkTime>(db.WorkTimes.Include(wt => wt.Issue).Include(i => i.Issue.Project).ToList());
                 return wts;
             }
 

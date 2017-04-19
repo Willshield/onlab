@@ -79,21 +79,5 @@ namespace ProjectTimeAssistant.Services.DataService
             return list;
         }
 
-
-        //ToDo: Get rid of this
-        public async Task<List<IssueWorktime>> GetIssueTimeEntries()
-        {
-            TimeEntriesContainer container = await networkService.GetTimeEntriesAsync();
-
-            List<IssueWorktime> list = new List<IssueWorktime>();
-            for (int i = 0; i < container.total_count; i++)
-            {
-                Models.IssueWorktime tmp = new IssueWorktime(container.time_entries[i].issue.id.ToString(), container.time_entries[i].project.name, container.time_entries[i].issue.id.ToString(), container.time_entries[i].updated_on, DateTime.Now);
-                
-                list.Add(tmp);
-            }
-
-            return list;
-        }
     }
 }

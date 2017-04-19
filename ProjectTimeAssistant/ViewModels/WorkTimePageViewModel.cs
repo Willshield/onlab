@@ -12,9 +12,9 @@ namespace ProjectTimeAssistant.ViewModels
 {
     public class WorkTimePageViewModel : ViewModelBase
     {
-        private ObservableCollection<IssueWorktime> list;
+        private ObservableCollection<WorkTime> list;
 
-        public ObservableCollection<IssueWorktime> List
+        public ObservableCollection<WorkTime> List
         {
             get { return list; }
             set { Set(ref list, value); }
@@ -24,21 +24,17 @@ namespace ProjectTimeAssistant.ViewModels
         {
             RefreshCommand = new DelegateCommand(Refresh);
             OrderCommand = new DelegateCommand(Order);
-            OrderingCats = new ObservableCollection<string>
-            {
-                "Tracker", "Project", "Subject", "Recent", "Working hours"
-            };
 
-        //init first and only datasource, pull
-        DataSource ds = DataSource.Instance;
-            List = new ObservableCollection<IssueWorktime>();
-            List.Add(new IssueWorktime { Tracker = "Feature xy", Project = "ultimate project", Subject = "Documentation", StartTime = DateTime.Now, FinishTime = DateTime.Now.AddDays(2)
-            });
+            //init first and only datasource, pull
+            DataSource ds = DataSource.Instance;
+            List = new ObservableCollection<WorkTime>();
+
+            Refresh();
         }
 
         public readonly ObservableCollection<string> OrderingCats;
         private int selectedItem;
-        public int SelectedItem { get { return selectedItem; } set { Set(ref selectedItem, value); } }
+        public int SelectedItem { get { return selectedItem; } set { Set(ref selectedItem, value); Order(); } }
         public DelegateCommand RefreshCommand { get; }
         public DelegateCommand OrderCommand { get; }
         public void Order()
@@ -46,26 +42,26 @@ namespace ProjectTimeAssistant.ViewModels
             switch (SelectedItem)
             {
                 case 0:
-                    List = new ObservableCollection<IssueWorktime>(List.OrderBy(i => i.Tracker));
+                    List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Issue.Tracker));
                     break;
                 case 1:
-                    List = new ObservableCollection<IssueWorktime>(List.OrderBy(i => i.Project));
+                    List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Issue.Project.Name));
                     break;
                 case 2:
-                    List = new ObservableCollection<IssueWorktime>(List.OrderBy(i => i.Subject));
+                    List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Issue.Subject));
                     break;
                 case 3:
-                    List = new ObservableCollection<IssueWorktime>(List.OrderBy(i => i.StartTime));
+                    List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.StartTime));
                     break;
                 case 4:
-                    List = new ObservableCollection<IssueWorktime>(List.OrderBy(i => i.FinishTime));
+                    List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Hours));
                     break;
             }
             
         }
         public void Refresh()
         {
-            List = new ObservableCollection<IssueWorktime>(DataSource.Instance.IssueWorktimeList);
+            List = new ObservableCollection<WorkTime>(DataSource.Instance.getWorkTimes());
         }
     }
 }

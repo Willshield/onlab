@@ -25,48 +25,22 @@ namespace ProjectTimeAssistant.Views
     public sealed partial class WorktimePage : Page
     {
 
-        List<IssueWorktime> WIssues;
-        Profile profile;
         ObservableCollection<string> OrderingCats;
 
         public WorktimePage()
         {
             this.InitializeComponent();
 
-            WIssues = new List<IssueWorktime>
-            {
-                new IssueWorktime { Tracker = "Feature xy", Project = "ultimate project", Subject = "Documentation", StartTime = DateTime.Now, FinishTime = DateTime.Now.AddDays(2) },
-                new IssueWorktime { Tracker = "Loginthingz", Project = "webkit", Subject = "Bugfix", StartTime = DateTime.Now, FinishTime = DateTime.Now.AddDays(2) },
-                new IssueWorktime { Tracker = "Easyuse", Project = "trackingapp", Subject = "Feature",  StartTime = DateTime.Now, FinishTime = DateTime.Now.AddDays(2) },
-                new IssueWorktime { Tracker = "Otherthing", Project = "webkit", Subject = "Feature",  StartTime = DateTime.Now, FinishTime = DateTime.Now.AddDays(2) },
-                new IssueWorktime { Tracker = "Feature xy", Project = "ultimate project", Subject = "Documentation", StartTime = DateTime.Now, FinishTime = DateTime.Now.AddDays(2) },
-                new IssueWorktime { Tracker = "Loginthingz", Project = "webkit", Subject = "Bugfix", StartTime = DateTime.Now, FinishTime = DateTime.Now.AddDays(2) },
-                new IssueWorktime { Tracker = "Easyuse", Project = "trackingapp", Subject = "Feature",  StartTime = DateTime.Now, FinishTime = DateTime.Now.AddDays(2) },
-                new IssueWorktime { Tracker = "Otherthing", Project = "webkit", Subject = "Feature",  StartTime = DateTime.Now, FinishTime = DateTime.Now.AddDays(2) },
-                new IssueWorktime { Tracker = "Feature xy", Project = "ultimate project", Subject = "Documentation", StartTime = DateTime.Now, FinishTime = DateTime.Now.AddDays(2) },
-                new IssueWorktime { Tracker = "Loginthingz", Project = "webkit", Subject = "Bugfix", StartTime = DateTime.Now, FinishTime = DateTime.Now.AddDays(2) },
-                new IssueWorktime { Tracker = "Easyuse", Project = "trackingapp", Subject = "Feature",  StartTime = DateTime.Now, FinishTime = DateTime.Now.AddDays(2) },
-                new IssueWorktime { Tracker = "Otherthing", Project = "webkit", Subject = "Feature",  StartTime = DateTime.Now, FinishTime = DateTime.Now.AddDays(2) },
-                new IssueWorktime { Tracker = "Feature xy", Project = "ultimate project", Subject = "Documentation", StartTime = DateTime.Now, FinishTime = DateTime.Now.AddDays(2) },
-                new IssueWorktime { Tracker = "Loginthingz", Project = "webkit", Subject = "Bugfix", StartTime = DateTime.Now, FinishTime = DateTime.Now.AddDays(2) },
-                new IssueWorktime { Tracker = "Easyuse", Project = "trackingapp", Subject = "Feature",  StartTime = DateTime.Now, FinishTime = DateTime.Now.AddDays(2) },
-                new IssueWorktime { Tracker = "Otherthing", Project = "webkit", Subject = "Feature",  StartTime = DateTime.Now, FinishTime = DateTime.Now.AddDays(2) }
-
-            };
-
-            //profile = new Models.Profile() { Name = "Gáspár Vilmos", Url = "onlab.m.redmine.org" };
-
             OrderingCats = new ObservableCollection<string>
             {
                 "Issue name", "Project", "Subject", "Recent", "Working hours"
             };
 
-            string asd = OrderingCats[0];
         }
 
-        private void selectChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ViewModel.Order();
-        }
+        //private void selectChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    ViewModel.Order();
+        //}
     }
 }

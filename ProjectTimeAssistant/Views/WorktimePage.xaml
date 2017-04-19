@@ -27,7 +27,7 @@
             <!--profilestamp-->
         <usercontrols:ProfileUserControl Grid.Row="0"/>
 
-        <ComboBox x:Name="OrderByCombo" Grid.Row="0" Header="Order by:" Width="296" Height="70" SelectionChanged="selectChanged" SelectedIndex="{Binding SelectedItem}" ItemsSource="{x:Bind OrderingCats}" VerticalAlignment="Center"/>
+        <ComboBox x:Name="OrderByCombo" Grid.Row="0" Header="Order by:" Width="296" Height="70" SelectedIndex="{Binding SelectedItem, Mode=TwoWay}" ItemsSource="{x:Bind OrderingCats}" VerticalAlignment="Center"/>
 
         <!--SelectionChanged="{Binding OrderCommand}"-->
         
@@ -49,14 +49,14 @@
                                FontSize="24" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
             <TextBlock Text="Work started" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
                                FontSize="24" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <TextBlock Text="Work ended" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+            <TextBlock Text="Hours worked" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
                                FontSize="24" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         </Grid>
 
         <ListView Width="900" MaxHeight="500" SelectionMode="Single" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding List}" Grid.Row="2">
 
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="models:IssueWorktime" >
+                <DataTemplate x:DataType="models:WorkTime" >
                     <Grid Margin="0,0,0,0" Height="20">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="200"/>
@@ -65,11 +65,11 @@
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="150"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{x:Bind Tracker}"     Foreground="{ThemeResource ApplicationForegroundThemeBrush}"    VerticalAlignment="Center" FontSize="12" Grid.Column="0" />
-                        <TextBlock Text="{x:Bind Project}"     Foreground="Blue" MaxLines="1"                                  VerticalAlignment="Center" FontSize="12" Grid.Column="1"/>
-                        <TextBlock Text="{x:Bind Subject}"     Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Opacity=".6" MaxLines="1"      VerticalAlignment="Center" FontSize="12" Grid.Column="2"/>
+                        <TextBlock Text="{x:Bind Issue.Tracker}"     Foreground="{ThemeResource ApplicationForegroundThemeBrush}"    VerticalAlignment="Center" FontSize="12" Grid.Column="0" />
+                        <TextBlock Text="{x:Bind Issue.Project.Name}"     Foreground="Blue" MaxLines="1"                                  VerticalAlignment="Center" FontSize="12" Grid.Column="1"/>
+                        <TextBlock Text="{x:Bind Issue.Subject}"     Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Opacity=".6" MaxLines="1"      VerticalAlignment="Center" FontSize="12" Grid.Column="2"/>
                         <TextBlock Text="{x:Bind StartTime}"   Foreground="Blue" MaxLines="1"                                  VerticalAlignment="Center" FontSize="12" Grid.Column="3"/>
-                        <TextBlock Text="{x:Bind FinishTime}"  Foreground="Blue" MaxLines="1"                                  VerticalAlignment="Center" FontSize="12" Grid.Column="4"/>
+                        <TextBlock Text="{x:Bind Hours}"  Foreground="Blue" MaxLines="1"                                  VerticalAlignment="Center" FontSize="12" Grid.Column="4"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -84,7 +84,7 @@
 
         <!--footer-->
         <usercontrols:PushPullUserControl VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="3"/>
-        <Button Content="Refresh" VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding RefreshCommand}" Grid.Row="3"/>
+        <!--<Button Content="Refresh" VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding RefreshCommand}" Grid.Row="3"/>-->
 
     </Grid>
 </Page>
