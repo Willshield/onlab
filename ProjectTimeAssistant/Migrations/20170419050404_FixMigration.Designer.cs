@@ -8,8 +8,8 @@ using ProjectTimeAssistant.Services.DataBase;
 namespace ProjectTimeAssistant.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20170419035856_TimeEntryHourAddedMigration")]
-    partial class TimeEntryHourAddedMigration
+    [Migration("20170419050404_FixMigration")]
+    partial class FixMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -74,6 +74,10 @@ namespace ProjectTimeAssistant.Migrations
                 {
                     b.Property<int>("WorkTimeID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Comment");
+
+                    b.Property<DateTime?>("FinishTime");
 
                     b.Property<double>("Hours");
 

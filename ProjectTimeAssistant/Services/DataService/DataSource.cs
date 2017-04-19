@@ -41,11 +41,11 @@ namespace ProjectTimeAssistant.Services.DataService
         }
 
         List<Issue> issueList;
-        public List<Issue> IssueList { get { return issueList; } private set { issueList = value; } }
+        //public List<Issue> IssueList { get { return issueList; } private set { issueList = value; } }
         List<Project> projectList;
-        public List<Project> ProjectList { get { return projectList; } private set { projectList = value; } }
+        //public List<Project> ProjectList { get { return projectList; } private set { projectList = value; } }
         List<WorkTime> worktimeList;
-        public List<WorkTime> WorktimeList { get { return worktimeList; } private set { worktimeList = value; } }
+        //public List<WorkTime> WorktimeList { get { return worktimeList; } private set { worktimeList = value; } }
 
 
         //for UI
@@ -55,17 +55,21 @@ namespace ProjectTimeAssistant.Services.DataService
 
         public async void PullAll()
         {
-            projectList = await dataConverter.GetProjects();
-            issueList = await dataConverter.GetIssues();
-
-            //worktimeList = await dataConverter.GetTimeEntries();
-
+            await FetchData();
             using (var db = new DataContext())
             {
                 PullProjects(db);
                 PullIssues(db);
-                //PullTimeEntries(db); todo: get timeentries
+                PullTimeEntries(db);
             }
+        }
+
+        private async System.Threading.Tasks.Task FetchData()
+        {
+            projectList = await dataConverter.GetProjects();
+            issueList = await dataConverter.GetIssues();
+            worktimeList = await dataConverter.GetTimeEntries();
+            //worktimeList = await dataConverter.GetTimeEntries();
         }
 
         private void PullProjects(DataContext db)
@@ -134,7 +138,7 @@ namespace ProjectTimeAssistant.Services.DataService
                     exists.IssueID = timeEntry.IssueID;
                     exists.WorkTimeID = timeEntry.WorkTimeID;
                     exists.StartTime = timeEntry.StartTime;
-                    exists.FinishTime = timeEntry.FinishTime;
+                    exists.FinishTime = timeEntry.FinishTime; //todo
 
                     var issue = db.Issues.Where(i => i.IssueID == timeEntry.IssueID).Single();
                     exists.Issue = issue;
@@ -153,6 +157,16 @@ namespace ProjectTimeAssistant.Services.DataService
                 return issues;
             }
             
+        }
+
+        public ObservableCollection<WorkTime> getWorkTimes()
+        {
+            using (var db = new DataContext())
+            {
+                var wts = new ObservableCollection<WorkTime>(db.WorkTimes.Include(wt => wt.Issue).ToList());
+                return wts;
+            }
+
         }
 
         public void PushAll()

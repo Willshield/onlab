@@ -25,9 +25,10 @@ namespace ProjectTimeAssistant.Models
         }
 
         public double Hours { get; set; }
+        public string Comment { get; set; }
 
         private DateTime? finishTime;
-        [NotMapped]
+        //[NotMapped] toDo: column remove workaround
         public DateTime? FinishTime
         {
             get { return finishTime; }

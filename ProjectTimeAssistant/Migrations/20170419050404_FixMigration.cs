@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjectTimeAssistant.Migrations
 {
-    public partial class TimeEntryHourAddedMigration : Migration
+    public partial class FixMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "FinishTime",
-                table: "WorkTimes");
+            migrationBuilder.AddColumn<string>(
+                name: "Comment",
+                table: "WorkTimes",
+                nullable: true);
 
             migrationBuilder.AddColumn<double>(
                 name: "Hours",
@@ -22,13 +23,12 @@ namespace ProjectTimeAssistant.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Hours",
+                name: "Comment",
                 table: "WorkTimes");
 
-            migrationBuilder.AddColumn<DateTime>(
-                name: "FinishTime",
-                table: "WorkTimes",
-                nullable: true);
+            migrationBuilder.DropColumn(
+                name: "Hours",
+                table: "WorkTimes");
         }
     }
 }

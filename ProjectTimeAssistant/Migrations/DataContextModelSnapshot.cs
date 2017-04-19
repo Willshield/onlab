@@ -74,6 +74,10 @@ namespace ProjectTimeAssistant.Migrations
                     b.Property<int>("WorkTimeID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Comment");
+
+                    b.Property<DateTime?>("FinishTime");
+
                     b.Property<double>("Hours");
 
                     b.Property<int>("IssueID");

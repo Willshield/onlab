@@ -68,9 +68,10 @@ namespace ProjectTimeAssistant.Services.DataService
             {
                 Models.WorkTime tmp = new WorkTime();
                 tmp.WorkTimeID = container.time_entries[i].id;
-                //tmp.StartTime = container.time_entries[i].
-                //todo
-                    
+                tmp.Hours = container.time_entries[i].hours;
+                tmp.StartTime = (container.time_entries[i].created_on).AddHours(-tmp.Hours);
+                tmp.IssueID = container.time_entries[i].issue.id;
+                tmp.Comment = container.time_entries[i].comments;
 
                 list.Add(tmp);
             }
@@ -78,6 +79,8 @@ namespace ProjectTimeAssistant.Services.DataService
             return list;
         }
 
+
+        //ToDo: Get rid of this
         public async Task<List<IssueWorktime>> GetIssueTimeEntries()
         {
             TimeEntriesContainer container = await networkService.GetTimeEntriesAsync();

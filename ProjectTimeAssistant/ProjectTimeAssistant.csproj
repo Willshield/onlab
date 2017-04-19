@@ -105,6 +105,10 @@
     <Compile Include="Migrations\20170419015424_MyFourthMigration.designer.cs">
       <DependentUpon>20170419015424_MyFourthMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20170419050404_FixMigration.cs" />
+    <Compile Include="Migrations\20170419050404_FixMigration.designer.cs">
+      <DependentUpon>20170419050404_FixMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DataContextModelSnapshot.cs" />
     <Compile Include="Models\Issue.cs" />
     <Compile Include="Models\IssueWorktime.cs" />
