@@ -23,18 +23,13 @@ namespace ProjectTimeAssistant.ViewModels
         public IssuesDetailsPageViewModel()
         {
             RefreshCommand = new DelegateCommand(Refresh);
-            PullCommand = new DelegateCommand(PullAll);
+            PullCommand = new DelegateCommand(PullAll); //todo: átrakni usercontrolhoz
 
             //init first and only datasource to pullAll
             DataSource ds = DataSource.Instance;
 
-            
             List = new ObservableCollection<Issue>();
-
-            //Dummy element
-            var p = new Project();
-            p.Name = "ultimate project";
-            List.Add(new Issue { Tracker = "Feature xy", Project = p, Subject = "Documentation", Description = "Paperstuff" });
+            Refresh();
         }
 
         public DelegateCommand RefreshCommand { get; }

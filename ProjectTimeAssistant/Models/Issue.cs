@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ProjectTimeAssistant.Services.DataService;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -92,16 +94,16 @@ namespace ProjectTimeAssistant.Models
         public Project Project { get; set; }
 
 
-        //public void addWorktime(WorkTime wt)
-        //{
-        //    worklist.Add(wt);
-        //}
-
-        //public void clearWorktime()
-        //{
-        //    worklist.Clear();
-        //}
-
-        //TODO: sum worktime
+        //Methods:
+        [NotMapped]
+        public double AllTrackedTime
+        {
+            get
+            {
+                var t = DataSource.Instance.getAllWorkTimes(this.IssueID);
+                return 0;
+            }
+        }
+        
     }
 }

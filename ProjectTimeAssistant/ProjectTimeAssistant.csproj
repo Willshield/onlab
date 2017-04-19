@@ -119,12 +119,12 @@
     <Compile Include="Services\DataBase\DataContext.cs" />
     <Compile Include="Services\DataService\DataSource.cs" />
     <Compile Include="Services\DataService\IDataConvertService.cs" />
-    <Compile Include="Services\DataService\RedmineDataConverter.cs" />
+    <Compile Include="Services\DataService\DataConverters\RedmineDataConverter.cs" />
     <Compile Include="Services\Network\INetworkDataService.cs" />
-    <Compile Include="Services\Network\IssueContainer.cs" />
-    <Compile Include="Services\Network\ProjectContainer.cs" />
-    <Compile Include="Services\Network\RedmineService.cs" />
-    <Compile Include="Services\Network\TimeEntriesContainer.cs" />
+    <Compile Include="Services\Network\RedmineSpecific\IssueContainer.cs" />
+    <Compile Include="Services\Network\RedmineSpecific\ProjectContainer.cs" />
+    <Compile Include="Services\Network\RedmineSpecific\RedmineService.cs" />
+    <Compile Include="Services\Network\RedmineSpecific\TimeEntriesContainer.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="ViewModels\IssuesDetailsPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
