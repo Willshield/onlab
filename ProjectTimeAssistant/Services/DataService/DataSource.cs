@@ -159,15 +159,6 @@ namespace ProjectTimeAssistant.Services.DataService
 
         }
 
-        public double getAllWorkTimes(int IssueId)
-        {
-            using (var db = new DataContext())
-            {
-                var t = db.WorkTimes.Where(wt => wt.IssueID == IssueId).Sum(wt => wt.Hours);
-                return t;
-            }     
-        }
-
         public void PushAll()
         {
             throw new NotImplementedException();

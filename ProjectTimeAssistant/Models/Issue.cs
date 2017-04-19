@@ -100,8 +100,8 @@ namespace ProjectTimeAssistant.Models
         {
             get
             {
-                var t = DataSource.Instance.getAllWorkTimes(this.IssueID);
-                return 0;
+                var t = WorkTimes.Where(wt => wt.IssueID == this.IssueID).Sum(wt => wt.Hours);
+                return t;
             }
         }
         
