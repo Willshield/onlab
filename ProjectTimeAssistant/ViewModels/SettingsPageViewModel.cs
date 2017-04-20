@@ -15,7 +15,13 @@ namespace ProjectTimeAssistant.ViewModels
 
     public class SettingsPartViewModel : ViewModelBase
     {
+
         Services.SettingsServices.SettingsService _settings;
+        public bool Is1 { get { return _settings.Rounding == 1; }   set { if (value) _settings.Rounding = 1; } }
+        public bool Is5 { get { return _settings.Rounding == 5; }   set { if (value) _settings.Rounding = 5; } }
+        public bool Is15 { get { return _settings.Rounding == 15; } set { if (value) _settings.Rounding = 15; } }
+        public bool Is30 { get { return _settings.Rounding == 30; } set { if (value) _settings.Rounding = 30; } }
+        public bool Is60 { get { return _settings.Rounding == 60; } set { if (value) _settings.Rounding = 60; } }
 
         public SettingsPartViewModel()
         {
@@ -52,6 +58,7 @@ namespace ProjectTimeAssistant.ViewModels
                 }
             }
         }
+
 
         public bool UseShellBackButton
         {

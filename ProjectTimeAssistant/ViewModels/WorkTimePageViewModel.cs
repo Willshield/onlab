@@ -26,10 +26,11 @@ namespace ProjectTimeAssistant.ViewModels
             OrderCommand = new DelegateCommand(Order);
 
             //init first and only datasource, pull
+            ///Views.Busy.SetBusy(true, "Please wait...");
             DataSource ds = DataSource.Instance;
             List = new ObservableCollection<WorkTime>();
-
             Refresh();
+            ///Views.Busy.SetBusy(false);
         }
 
         public readonly ObservableCollection<string> OrderingCats;

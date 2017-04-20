@@ -77,7 +77,22 @@ namespace ProjectTimeAssistant.Services.SettingsServices
             }
         }
 
+        /// <summary>
+        /// saját hozzáadások
+        /// </summary>
         public Models.Profile Profile { get; set; }
+
+        public int Rounding
+        {
+            get
+            {
+                return _helper.Read<int>(nameof(Rounding), 30);
+            }
+            set
+            {
+                _helper.Write(nameof(Rounding), value);
+            }
+        }
 
 
     }

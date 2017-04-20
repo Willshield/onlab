@@ -88,12 +88,11 @@
                     <TextBlock FontSize="32" Text="Rounding" Margin="0,20,0,10" />
                     <TextBlock Text="Rounding to" Style="{ThemeResource BaseTextBlockStyle}"/>
                     <StackPanel Orientation="Vertical">
-                        <RadioButton Content="1 minute" Tag="minute" />
-                        <!--Checked="BGRadioButton_Checked" eseménykezelõ-->
-                        <RadioButton Content="5 minutes" Tag="fiveMinute"/>
-                        <RadioButton Content="15 minutes" Tag="fifteenMinute"/>
-                        <RadioButton Content="30 minutes" Tag="halfHour" IsChecked="True"/>
-                        <RadioButton Content="60 minutes" Tag="hour"/>
+                        <RadioButton Content="1 minute" Tag="1"    IsChecked="{Binding SettingsPartViewModel.Is1, Mode=TwoWay}"/>
+                        <RadioButton Content="5 minutes" Tag="5"   IsChecked="{Binding SettingsPartViewModel.Is5, Mode=TwoWay}"/>
+                        <RadioButton Content="15 minutes" Tag="15" IsChecked="{Binding SettingsPartViewModel.Is15, Mode=TwoWay}"/>
+                        <RadioButton Content="30 minutes" Tag="30" IsChecked="{Binding SettingsPartViewModel.Is30, Mode=TwoWay}"/>
+                        <RadioButton Content="60 minutes" Tag="60" IsChecked="{Binding SettingsPartViewModel.Is60, Mode=TwoWay}"/>
                     </StackPanel>
                     <ToggleSwitch x:Name="AlwaysUp" IsOn="True" Header="Always round worktime up" Margin="0,10,0,0" />
                 </StackPanel>

@@ -19,7 +19,7 @@
     </Page.DataContext>
 
     <Grid>
-        <!--<TextBlock Text="{Binding TestText}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>-->
+        <TextBlock Text="{Binding TestText}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
     
 
