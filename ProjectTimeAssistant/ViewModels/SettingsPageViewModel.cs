@@ -23,6 +23,11 @@ namespace ProjectTimeAssistant.ViewModels
         public bool Is30 { get { return _settings.Rounding == 30; } set { if (value) _settings.Rounding = 30; } }
         public bool Is60 { get { return _settings.Rounding == 60; } set { if (value) _settings.Rounding = 60; } }
 
+        public bool AutoTrack { get { return _settings.AutoTrack; } set { _settings.AutoTrack = value; } }
+        public bool AskIfStop { get { return _settings.AskIfStop; } set { _settings.AskIfStop = value; } }
+        public bool AlwaysUp { get { return _settings.AlwaysUp; } set { _settings.AlwaysUp = value; } }
+
+
         public SettingsPartViewModel()
         {
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)

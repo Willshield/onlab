@@ -82,8 +82,8 @@
             <PivotItem Header="General">
                 <StackPanel Orientation="Vertical">
                     <TextBlock FontSize="32" Text="Tracking" Margin="0,20,0,10" />
-                    <ToggleSwitch x:Name="AutoTrackSwitch" IsOn="False" Header="Auto tracking on select"/>
-                    <ToggleSwitch x:Name="AskIfStop" IsOn="False" Header="Ask before tracking stops"/>
+                    <ToggleSwitch x:Name="AutoTrackSwitch" IsOn="{Binding SettingsPartViewModel.AutoTrack , Mode=TwoWay}" Header="Auto tracking on select"/>
+                    <ToggleSwitch x:Name="AskIfStopSwitch" IsOn="{Binding SettingsPartViewModel.AskIfStop , Mode=TwoWay}" Header="Ask before tracking stops"/>
 
                     <TextBlock FontSize="32" Text="Rounding" Margin="0,20,0,10" />
                     <TextBlock Text="Rounding to" Style="{ThemeResource BaseTextBlockStyle}"/>
@@ -94,7 +94,7 @@
                         <RadioButton Content="30 minutes" Tag="30" IsChecked="{Binding SettingsPartViewModel.Is30, Mode=TwoWay}"/>
                         <RadioButton Content="60 minutes" Tag="60" IsChecked="{Binding SettingsPartViewModel.Is60, Mode=TwoWay}"/>
                     </StackPanel>
-                    <ToggleSwitch x:Name="AlwaysUp" IsOn="True" Header="Always round worktime up" Margin="0,10,0,0" />
+                    <ToggleSwitch x:Name="AlwaysUpSwitch" IsOn="{Binding SettingsPartViewModel.AlwaysUp , Mode=TwoWay}" Header="Always round worktime up" Margin="0,10,0,0" />
                 </StackPanel>
             </PivotItem>
 

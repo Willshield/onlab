@@ -84,16 +84,27 @@ namespace ProjectTimeAssistant.Services.SettingsServices
 
         public int Rounding
         {
-            get
-            {
-                return _helper.Read<int>(nameof(Rounding), 30);
-            }
-            set
-            {
-                _helper.Write(nameof(Rounding), value);
-            }
+            get { return _helper.Read<int>(nameof(Rounding), 30); }
+            set { _helper.Write(nameof(Rounding), value); }
         }
 
+        public bool AutoTrack {
+            get { return _helper.Read<bool>(nameof(AutoTrack), false); }
+            set { _helper.Write(nameof(AutoTrack), value); }
+        }
+
+        public bool AskIfStop
+        {
+            get { return _helper.Read<bool>(nameof(AskIfStop), false); }
+            set { _helper.Write(nameof(AskIfStop), value); }
+        }
+
+        public bool AlwaysUp
+        {
+            get { return _helper.Read<bool>(nameof(AlwaysUp), true); }
+            set { _helper.Write(nameof(AlwaysUp), value); }
+        }
+        
 
     }
 }
