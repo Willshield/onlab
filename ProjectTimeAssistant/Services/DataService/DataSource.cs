@@ -9,7 +9,7 @@ using System.Linq;
 namespace ProjectTimeAssistant.Services.DataService
 {
     //thread safe singleton
-    class DataSource
+    class DataSource : IDataService
     {
         private static IDataConvertService dataConverter;
         private static DataSource instance = null;
@@ -31,7 +31,6 @@ namespace ProjectTimeAssistant.Services.DataService
                         if (instance == null)
                         {
                             instance = new DataSource();
-                            //todo
                             instance.PullAll();
                         }
                     }
@@ -40,6 +39,7 @@ namespace ProjectTimeAssistant.Services.DataService
             }
         }
 
+        //újragondolni miért használom ezt
         List<Issue> issueList;
         List<Project> projectList;
         List<WorkTime> worktimeList;

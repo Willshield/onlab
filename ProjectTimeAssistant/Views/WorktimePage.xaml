@@ -66,9 +66,9 @@
                             <ColumnDefinition Width="150"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{x:Bind Issue.Subject}"     Foreground="{ThemeResource ApplicationForegroundThemeBrush}" VerticalAlignment="Center" FontSize="12" Grid.Column="0"/>
-                        <TextBlock Text="{x:Bind Issue.Project.Name}"     Foreground="Blue"                                     VerticalAlignment="Center" FontSize="12" Grid.Column="1"/>
-                        <TextBlock Text="{x:Bind StartTime}"   Foreground="Blue"                                                VerticalAlignment="Center" FontSize="12" Grid.Column="2"/>
-                        <TextBlock Text="{x:Bind Hours}"       Foreground="Blue"                                                VerticalAlignment="Center" FontSize="12" Grid.Column="3" />
+                        <TextBlock Text="{x:Bind Issue.Project.Name}"     Foreground="{ThemeResource ApplicationForegroundThemeBrush}"           VerticalAlignment="Center" FontSize="12" Grid.Column="1"/>
+                        <TextBlock Text="{x:Bind StartTime }"   Foreground="{ThemeResource ApplicationForegroundThemeBrush}"     VerticalAlignment="Center" FontSize="12" Grid.Column="2"/>
+                        <TextBlock Text="{x:Bind Hours}"       Foreground="{ThemeResource ApplicationForegroundThemeBrush}"     VerticalAlignment="Center" FontSize="12" Grid.Column="3" />
                         <TextBlock Text="{x:Bind Comment}"     Foreground="{ThemeResource ApplicationForegroundThemeBrush}"     VerticalAlignment="Center" FontSize="12" Grid.Column="4" />
                     </Grid>
                 </DataTemplate>

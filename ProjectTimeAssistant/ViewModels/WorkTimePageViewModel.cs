@@ -20,17 +20,24 @@ namespace ProjectTimeAssistant.ViewModels
             set { Set(ref list, value); }
         }
 
+        IDataService DataService;
+
         public WorkTimePageViewModel()
         {
             RefreshCommand = new DelegateCommand(Refresh);
             OrderCommand = new DelegateCommand(Order);
 
-            //init first and only datasource, pull
-            ///Views.Busy.SetBusy(true, "Please wait...");
-            DataSource ds = DataSource.Instance;
-            List = new ObservableCollection<WorkTime>();
+            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            {
+                DataService = new DesignTimeDataService();
+            } else
+            {
+                DataService = DataSource.Instance;
+            }
+
+            //List = new ObservableCollection<WorkTime>();
             Refresh();
-            ///Views.Busy.SetBusy(false);
+
         }
 
         public readonly ObservableCollection<string> OrderingCats;
@@ -60,9 +67,11 @@ namespace ProjectTimeAssistant.ViewModels
             }
             
         }
+
+
         public void Refresh()
         {
-            List = new ObservableCollection<WorkTime>(DataSource.Instance.getWorkTimes());
+            List = DataService.getWorkTimes();
         }
     }
 }
