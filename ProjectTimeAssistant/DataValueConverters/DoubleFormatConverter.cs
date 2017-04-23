@@ -19,7 +19,15 @@ namespace ProjectTimeAssistant.DataValueConverters
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            throw new NotImplementedException();
+            if (value == null)
+                return null;
+
+            string val = value as string;
+            double ret;
+            if(double.TryParse(val, out ret))
+                return ret;
+
+            return 0;
         }
     }
 }
