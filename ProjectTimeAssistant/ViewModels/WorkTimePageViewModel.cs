@@ -20,6 +20,7 @@ namespace ProjectTimeAssistant.ViewModels
             set { Set(ref list, value); }
         }
 
+
         IDataService DataService;
 
         public WorkTimePageViewModel()
