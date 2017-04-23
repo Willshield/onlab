@@ -32,21 +32,21 @@
             <Grid Margin="0" Grid.Row="1" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" HorizontalAlignment="Left">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30"/>
-                    <ColumnDefinition Width="190"/>
+                    <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="140"/>
                     <ColumnDefinition Width="136"/>
                     <ColumnDefinition Width="6"/>
-                    <ColumnDefinition Width="496"/>
+                    <ColumnDefinition Width="486"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Tracker" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
-                               FontSize="24" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <TextBlock Text="Project" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
-                               FontSize="24" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <TextBlock Text="Subject" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
-                               FontSize="24" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                               FontSize="20" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Text="Project" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="20" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Text="Tracker" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="20" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <Rectangle VerticalAlignment="Center" Width="4" Height="48" Grid.Column="4" Fill="{ThemeResource ApplicationForegroundThemeBrush}" />
                 <TextBlock Text="Details" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
-                               FontSize="24" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                               FontSize="20" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>
 
             <!--masterdetails-->
@@ -56,15 +56,15 @@
                                     Foreground="Black" MasterPaneWidth="500">
                     <controls:MasterDetailsView.ItemTemplate>
                         <DataTemplate x:DataType="models:Issue">
-                            <Grid Margin="0,0,0,0">
+                            <Grid Margin="2">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="200"/>
-                                    <ColumnDefinition Width="150"/>
-                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="220"/>
+                                    <ColumnDefinition Width="140"/>
+                                    <ColumnDefinition Width="140"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="{x:Bind Tracker}" Style="{ThemeResource SubtitleTextBlockStyle}" VerticalAlignment="Center" Grid.Column="0"/>
-                                <TextBlock Text="{x:Bind Project.Name}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="Blue" MaxLines="1" VerticalAlignment="Center" Grid.Column="1"/>
-                                <TextBlock Text="{x:Bind Subject}" Style="{ThemeResource BodyTextBlockStyle}" Opacity=".6" MaxLines="1" VerticalAlignment="Center" Grid.Column="2"/>
+                                <TextBlock Text="{x:Bind Subject }" Style="{ThemeResource SubtitleTextBlockStyle}" VerticalAlignment="Center" Grid.Column="0"  FontSize="18"/>
+                                <TextBlock Text="{x:Bind Project.Name}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="Blue" MaxLines="1" VerticalAlignment="Center" Grid.Column="1"  FontSize="18"/>
+                                <TextBlock Text="{x:Bind Tracker}" Style="{ThemeResource BodyTextBlockStyle}" Opacity=".6" MaxLines="1" VerticalAlignment="Center" Grid.Column="2"  FontSize="18"/>
                             </Grid>
                         </DataTemplate>
                     </controls:MasterDetailsView.ItemTemplate>

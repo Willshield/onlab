@@ -42,22 +42,22 @@
                 <ColumnDefinition Width="240"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Subject" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
-                               FontSize="24" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                               FontSize="20" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
             <TextBlock Text="Project" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
-                               FontSize="24" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <TextBlock Text="Tracker" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
-                               FontSize="24" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                               FontSize="20" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left"/>
             <TextBlock Text="Work started" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
-                               FontSize="24" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                               FontSize="20" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
             <TextBlock Text="Hours worked" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
-                               FontSize="24" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                               FontSize="20" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBlock Text="Comment" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="20" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         </Grid>
 
         <ListView Width="900" MaxHeight="500" SelectionMode="Single" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding List}" Grid.Row="2">
 
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:WorkTime" >
-                    <Grid Margin="0,0,0,0" Height="20">
+                    <Grid Margin="2" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="200"/>
                             <ColumnDefinition Width="150"/>
@@ -65,11 +65,11 @@
                             <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="150"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{x:Bind Issue.Subject}"     Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Opacity=".6" MaxLines="1"      VerticalAlignment="Center" FontSize="12" Grid.Column="0"/>
-                        <TextBlock Text="{x:Bind Issue.Project.Name}"     Foreground="Blue" MaxLines="1"                                  VerticalAlignment="Center" FontSize="12" Grid.Column="1"/>
-                        <TextBlock Text="{x:Bind Issue.Tracker}"     Foreground="{ThemeResource ApplicationForegroundThemeBrush}"    VerticalAlignment="Center" FontSize="12" Grid.Column="2" />
-                        <TextBlock Text="{x:Bind StartTime}"   Foreground="Blue" MaxLines="1"                                  VerticalAlignment="Center" FontSize="12" Grid.Column="3"/>
-                        <TextBlock Text="{x:Bind Hours}"  Foreground="Blue" MaxLines="1"                                  VerticalAlignment="Center" FontSize="12" Grid.Column="4" />
+                        <TextBlock Text="{x:Bind Issue.Subject}"     Foreground="{ThemeResource ApplicationForegroundThemeBrush}" VerticalAlignment="Center" FontSize="12" Grid.Column="0"/>
+                        <TextBlock Text="{x:Bind Issue.Project.Name}"     Foreground="Blue"                                     VerticalAlignment="Center" FontSize="12" Grid.Column="1"/>
+                        <TextBlock Text="{x:Bind StartTime}"   Foreground="Blue"                                                VerticalAlignment="Center" FontSize="12" Grid.Column="2"/>
+                        <TextBlock Text="{x:Bind Hours}"       Foreground="Blue"                                                VerticalAlignment="Center" FontSize="12" Grid.Column="3" />
+                        <TextBlock Text="{x:Bind Comment}"     Foreground="{ThemeResource ApplicationForegroundThemeBrush}"     VerticalAlignment="Center" FontSize="12" Grid.Column="4" />
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
