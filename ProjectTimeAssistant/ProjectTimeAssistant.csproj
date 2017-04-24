@@ -111,6 +111,10 @@
     <Compile Include="Migrations\20170419050404_FixMigration.designer.cs">
       <DependentUpon>20170419050404_FixMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20170424012842_WorkTimeDirtyAddedMigration.cs" />
+    <Compile Include="Migrations\20170424012842_WorkTimeDirtyAddedMigration.designer.cs">
+      <DependentUpon>20170424012842_WorkTimeDirtyAddedMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DataContextModelSnapshot.cs" />
     <Compile Include="Models\Issue.cs" />
     <Compile Include="Models\IssueWorktime.cs" />

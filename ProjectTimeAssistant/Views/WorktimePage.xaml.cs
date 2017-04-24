@@ -33,7 +33,7 @@ namespace ProjectTimeAssistant.Views
 
             OrderingCats = new ObservableCollection<string>
             {
-                "Issue name", "Project", "Subject", "Recent", "Working hours"
+                "Subject", "Project", "Recent", "Working hours", "Comment"
             };
 
         }

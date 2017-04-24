@@ -5,38 +5,76 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using ProjectTimeAssistant.Models;
+using ProjectTimeAssistant.Services.DataService;
 
 namespace ProjectTimeAssistant.Services.Tracking
 {
     class Tracker
     {
-        Issue trackedIssue;
-        Stopwatch stopWatch;
-        Tracker(Issue issue)
+        private Issue trackedIssue;
+        private static Stopwatch stopWatch;
+        private static Tracker instance = null;
+        private IDataService dataService;
+        private WorkTime trackedTime;
+
+        private Tracker()
         {
-            trackedIssue = issue;
             stopWatch = new Stopwatch();
+            dataService = DataSource.Instance;
         }
 
-        public void StartTracking()
+        public static Tracker Instance
         {
-            if(!stopWatch.IsRunning)
-                stopWatch.Start();
+            get
+            {
+
+                if (instance == null)
+                {
+                    instance = new Tracker();
+                }
+
+                return instance;
+            }
         }
 
-        public TimeSpan StopTracking()
+        private void setIssue(Issue issue)
+        {
+            if (!stopWatch.IsRunning)
+            {
+                trackedIssue = issue;
+            } else
+            {
+                StopTracking();
+                trackedIssue = issue;
+            }
+        }
+
+        public void StartTracking(Issue issue, string comment)
+        {
+            setIssue(issue);
+            trackedTime = new WorkTime();
+            trackedTime.StartTime = DateTime.Now;
+            trackedTime.Comment = comment;
+            stopWatch.Start();
+        }
+
+        //ToDo: add setComment
+
+        public void StopTracking()
         {
             if (stopWatch.IsRunning)
             {
                 stopWatch.Stop();
-                WorkTime trackedTime = new WorkTime();
                 trackedTime.IssueID = trackedIssue.IssueID;
                 //Database connetc requires to search this item
-                trackedTime.Issue = trackedIssue;
                 trackedTime.FinishTime = DateTime.Now;
                 trackedTime.Hours = ((double) stopWatch.Elapsed.Hours) + ((double) stopWatch.Elapsed.Minutes) / 60.0;
+                dataService.AddTimeEntry(trackedTime);
+
+                trackedIssue = null;
             }
-            return stopWatch.Elapsed;    
         }
+
+
     }
 }

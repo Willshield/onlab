@@ -72,6 +72,7 @@ namespace ProjectTimeAssistant.Services.DataService
                 tmp.StartTime = (container.time_entries[i].created_on).AddHours(-tmp.Hours);
                 tmp.IssueID = container.time_entries[i].issue.id;
                 tmp.Comment = container.time_entries[i].comments;
+                tmp.Dirty = false;
 
                 list.Add(tmp);
             }

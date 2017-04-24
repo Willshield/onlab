@@ -46,6 +46,13 @@ namespace ProjectTimeAssistant.Models
             }
         }
 
+        private bool dirty;
+        public bool Dirty
+        {
+            get { return dirty; }
+            set { dirty = value; }
+        }
+
         //navigációs
         public int IssueID { get; set; }
         public Issue Issue { get; set; }

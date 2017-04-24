@@ -54,19 +54,19 @@ namespace ProjectTimeAssistant.ViewModels
             switch (SelectedItem)
             {
                 case 0:
-                    List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Issue.Tracker));
+                    List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Issue.Subject));
                     break;
                 case 1:
                     List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Issue.Project.Name));
                     break;
                 case 2:
-                    List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Issue.Subject));
-                    break;
-                case 3:
                     List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.StartTime));
                     break;
-                case 4:
+                case 3:
                     List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Hours));
+                    break;
+                case 4:
+                    List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Comment));
                     break;
             }
             

@@ -13,7 +13,6 @@ namespace ProjectTimeAssistant.Services.DataService
     {
         private static IDataConvertService dataConverter;
         private static DataSource instance = null;
-        private static readonly object padlock = new object();
 
         DataSource()
         {
@@ -154,6 +153,19 @@ namespace ProjectTimeAssistant.Services.DataService
             }
 
         }
+
+        public void AddTimeEntry(WorkTime workTime)
+        {
+            using (var db = new DataContext())
+            {
+                var issue = db.Issues.Where(i => i.IssueID == workTime.IssueID).Single();
+                workTime.Issue = issue;
+                workTime.Dirty = true;
+                db.WorkTimes.Add(workTime);
+                db.SaveChanges();
+            }
+
+         }
 
         public void PushAll()
         {

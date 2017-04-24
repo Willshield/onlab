@@ -10,6 +10,11 @@ namespace ProjectTimeAssistant.Services.DataService
 {
     class DesignTimeDataService : IDataService
     {
+        public void AddTimeEntry(WorkTime workTime)
+        {
+            throw new NotImplementedException();
+        }
+
         public Issue getActuallyTracked()
         {
             Models.Issue tmp = new Models.Issue();

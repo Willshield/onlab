@@ -13,6 +13,7 @@ namespace ProjectTimeAssistant.Services.DataService
         ObservableCollection<Issue> getIssues();
         ObservableCollection<WorkTime> getWorkTimes();
         Issue getActuallyTracked();
+        void AddTimeEntry(WorkTime workTime);
     }
 
 }
