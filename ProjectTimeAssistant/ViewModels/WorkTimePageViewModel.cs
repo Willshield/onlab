@@ -31,13 +31,16 @@ namespace ProjectTimeAssistant.ViewModels
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
                 DataService = new DesignTimeDataService();
+                Refresh();
             } else
             {
                 DataService = DataSource.Instance;
+                Refresh();
+                SelectedItem = 4;
             }
 
             //List = new ObservableCollection<WorkTime>();
-            Refresh();
+            
 
         }
 

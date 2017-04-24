@@ -12,7 +12,7 @@ namespace ProjectTimeAssistant.Services.DataService
     {
         ObservableCollection<Issue> getIssues();
         ObservableCollection<WorkTime> getWorkTimes();
-
+        Issue getActuallyTracked();
     }
 
 }

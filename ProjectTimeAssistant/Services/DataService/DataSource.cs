@@ -164,5 +164,9 @@ namespace ProjectTimeAssistant.Services.DataService
             throw new NotImplementedException();
         }
 
+        public Issue getActuallyTracked()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

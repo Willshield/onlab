@@ -10,6 +10,21 @@ namespace ProjectTimeAssistant.Services.DataService
 {
     class DesignTimeDataService : IDataService
     {
+        public Issue getActuallyTracked()
+        {
+            Models.Issue tmp = new Models.Issue();
+            tmp.IssueID = 1;
+            tmp.Tracker = "Tracker";
+            tmp.Project = new Models.Project();
+            tmp.ProjectID = 1;
+            tmp.Project.Name = "ProjectName";
+            tmp.Subject = "Subject";
+            tmp.Description = "Description";
+            tmp.Priority = "Priority";
+            tmp.Updated = DateTime.Now;
+            return tmp;
+        }
+
         public ObservableCollection<Issue> getIssues()
         {
             ObservableCollection<Models.Issue> list = new ObservableCollection<Models.Issue>();
