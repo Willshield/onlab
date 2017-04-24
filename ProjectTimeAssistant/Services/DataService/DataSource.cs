@@ -24,17 +24,13 @@ namespace ProjectTimeAssistant.Services.DataService
         {
             get
             {
+                
                 if (instance == null)
                 {
-                    lock (padlock)
-                    {
-                        if (instance == null)
-                        {
-                            instance = new DataSource();
-                            instance.PullAll();
-                        }
-                    }
+                    instance = new DataSource();
+                    instance.PullAll();
                 }
+                    
                 return instance;
             }
         }
