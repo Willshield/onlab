@@ -30,7 +30,7 @@
         </Grid.RowDefinitions>
 
             <!--profilestamp-->
-        <usercontrols:ProfileUserControl Grid.Row="0"/>
+        <usercontrols:ProfileUserControl Grid.Row="0" HorizontalAlignment="Right"/>
 
         <ComboBox x:Name="OrderByCombo" Grid.Row="0" Header="Order by:" Width="296" Height="70" SelectedIndex="{Binding SelectedItem, Mode=TwoWay}" SelectedItem="Recent" ItemsSource="{x:Bind OrderingCats}" VerticalAlignment="Center"/>
 

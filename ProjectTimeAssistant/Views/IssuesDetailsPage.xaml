@@ -25,7 +25,7 @@
             </Grid.RowDefinitions>
 
             <!--profilestamp-->
-            <usercontrols:ProfileUserControl Grid.Row="0"/>
+            <usercontrols:ProfileUserControl Grid.Row="0" HorizontalAlignment="Right"/>
             
 
             <!--table header-->
