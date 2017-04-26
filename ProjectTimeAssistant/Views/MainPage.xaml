@@ -18,9 +18,19 @@
         <vm:MainPageViewModel x:Name="ViewModel" />
     </Page.DataContext>
 
-    <Grid>
-        <usercontrols:ActuallyTrackingUserControl HorizontalAlignment="Center"  VerticalAlignment="Top" />
-        <TextBlock Text="{Binding TestText}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    <Grid Margin="75,5,5,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!--profilestamp-->
+        <usercontrols:ProfileUserControl Grid.Row="0" HorizontalAlignment="Right" />
+        <Grid Grid.Row="0" Height="80" Width="450" Margin="20" Padding="80,0,80,0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}">
+            <TextBlock Text="Home" Margin="10" Foreground="{ThemeResource ApplicationForegroundThemeBrush}"  FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        </Grid>
+
+        <usercontrols:ActuallyTrackingUserControl HorizontalAlignment="Left"  VerticalAlignment="Center"  Grid.Row="1"/>
     </Grid>
     
 

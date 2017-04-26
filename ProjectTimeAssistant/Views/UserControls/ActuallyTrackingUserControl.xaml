@@ -13,14 +13,16 @@
     <UserControl.DataContext>
         <vm:ActuallyTrackingUserControlViewModel x:Name="ViewModel" />
     </UserControl.DataContext>
-
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" MinWidth="450" MaxWidth="750" Height="150">
         <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}">
             <TextBlock Text="Actually tracking:" Margin="10" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" />
             <StackPanel Orientation="Vertical" Margin="10" VerticalAlignment="Center">
                 <TextBlock Text="{Binding Subject}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <TextBlock Text="{Binding Project}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" MaxLines="1" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding Project}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" MaxLines="1" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <TextBlock Text="{Binding TimeStamp}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" MaxLines="1" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </StackPanel>
         </StackPanel>
+    </Grid>
+        
         
 </UserControl>

@@ -26,9 +26,9 @@
 
             <!--profilestamp-->
             <usercontrols:ProfileUserControl Grid.Row="0" HorizontalAlignment="Right" />
-            <StackPanel Grid.Row="0" Height="80" Orientation="Horizontal" Margin="20" Padding="80,0,80,0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}">
+            <Grid Grid.Row="0" Height="80" Width="450" Margin="20" Padding="80,0,80,0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}">
                 <TextBlock Text="Issue details" Margin="10" Foreground="{ThemeResource ApplicationForegroundThemeBrush}"  FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
-            </StackPanel>
+            </Grid>
 
             <!--table header-->
             <Grid Margin="0" Grid.Row="1" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" HorizontalAlignment="Left">

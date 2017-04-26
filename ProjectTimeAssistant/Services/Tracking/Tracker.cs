@@ -131,7 +131,7 @@ namespace ProjectTimeAssistant.Services.Tracking
 
         public string IssueSubject
         {
-            get { return trackedIssue.Subject; }
+            get { return trackedIssue.Subject;  }
         }
 
         public void StopTracking()
@@ -145,10 +145,10 @@ namespace ProjectTimeAssistant.Services.Tracking
                 trackedTime.Hours = ((double)time.Hours) + ((double)time.Minutes / 60.0) + ((double) time.Seconds / 3600.0);
 
                 //Database connetc requires to search this item TODO: uncomment to save to database
-                ////dataService.AddTimeEntry(trackedTime);
+                dataService.AddTimeEntry(trackedTime);
 
                 time = new TimeSpan(0, 0, 0);
-                trackedIssue = null;
+                trackedIssue = new Issue();
                 trackedTime = new WorkTime();
             }
         }
@@ -159,7 +159,7 @@ namespace ProjectTimeAssistant.Services.Tracking
             {
                 stopWatch.Stop();
                 time = new TimeSpan(0, 0, 0);
-                trackedIssue = null;
+                trackedIssue = new Issue();
                 trackedTime = new WorkTime();
             }
         }

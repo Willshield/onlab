@@ -23,18 +23,20 @@ namespace ProjectTimeAssistant.ViewModels
         public string Subject
         {
             get { return subject; }
+            private set { Set(ref subject, value); }
         }
 
         public string project;
         public string Project
         {
             get { return project; }
+            private set { Set(ref project, value); }
         }
 
-        private void SetDisplayedData()
+        public void SetDisplayedData()
         {
-            subject = tracker.IssueSubject;
-            project = tracker.ProjectName;
+            Subject = tracker.IssueSubject;
+            Project = tracker.ProjectName;
         }
 
         private void TimeChangedEventHandler(TimeSpan t)
