@@ -50,34 +50,11 @@ namespace ProjectTimeAssistant.Models
 
         //kapcsolat
         public List<WorkTime> WorkTimes { get; set; }
-        //public Issue()
-        //{
-        //    //TODO: Init params
-
-        //    //worklist = new List<WorkTime>();
-        //}
-
-        //public Issue(int id, string tracker, string project, string subject, string description)
-        //{
-        //    this.IssueID = id;
-        //    this.Tracker = tracker;
-        //    this.Project = project;
-        //    this.Subject = subject;
-        //    this.Description = description;
-
-        //    //worklist = new List<WorkTime>();
-        //}
-
-        ////TODO:
-        //public string AllWorkingTime
-        //{
-        //    get { return "No tracked time"; }
-        //}
+        
 
         public string Priority
         {
             get;
-            //TODO: validation
             set;
         }
 
@@ -85,7 +62,6 @@ namespace ProjectTimeAssistant.Models
         public DateTime Updated
         {
             get;
-            //TODO: validation
             set;
         }
 
@@ -95,7 +71,7 @@ namespace ProjectTimeAssistant.Models
 
 
         //Methods:
-        [NotMapped]
+        [NotMapped] //cant reach.............
         public double AllTrackedTime
         {
             get
@@ -104,6 +80,6 @@ namespace ProjectTimeAssistant.Models
                 return t;
             }
         }
-        
+
     }
 }

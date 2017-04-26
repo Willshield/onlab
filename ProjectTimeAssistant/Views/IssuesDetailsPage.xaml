@@ -53,7 +53,7 @@
 
             <!--masterdetails-->
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="2" > <!--Kerethez: BorderBrush="{ThemeResource ApplicationForegroundThemeBrush}" BorderThickness="2" MaxWidth="1000" HorizontalAlignment="Left"-->
-                <controls:MasterDetailsView ItemsSource="{Binding List}"
+                <controls:MasterDetailsView ItemsSource="{Binding List}" SelectedItem="{Binding Selected, Mode=TwoWay}" 
                                     NoSelectionContent="Select an item to view"
                                     Foreground="Black" MasterPaneWidth="500">
                     <controls:MasterDetailsView.ItemTemplate>
@@ -84,7 +84,7 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel Orientation="Horizontal" Grid.Row="0">
                                     <TextBlock Text="All tracked worktime:" Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" Opacity=".6" MaxLines="1" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding AllWorkingTime}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="15" VerticalAlignment="Center" Margin="10,0,0,0" />
+                                    <TextBlock Text="{Binding AllWorkingTime, Mode=TwoWay}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="15" VerticalAlignment="Center" Margin="10,0,0,0" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Grid.Row="1">
                                     <TextBlock Text="Priority:" Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" Opacity=".6" MaxLines="1" VerticalAlignment="Center"/>

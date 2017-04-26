@@ -30,6 +30,11 @@ namespace ProjectTimeAssistant.Services.DataService
             return tmp;
         }
 
+        public double getAllWorkingTime(Issue issue)
+        {
+            return 10.4;
+        }
+
         public ObservableCollection<Issue> getIssues()
         {
             ObservableCollection<Models.Issue> list = new ObservableCollection<Models.Issue>();

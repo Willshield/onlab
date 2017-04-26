@@ -20,6 +20,24 @@ namespace ProjectTimeAssistant.ViewModels
             set { Set(ref list, value); }
         }
 
+        private double allWorkingTime;
+        public double AllWorkingTimes
+        {
+            get { return allWorkingTime; }
+            set { Set(ref allWorkingTime, value); }
+        }
+
+        private object selected;
+        public object Selected
+        {
+            get { return selected; }
+            set
+            {
+                Set(ref selected, value);
+                AllWorkingTimes = DataSource.Instance.getAllWorkingTime(value as Issue);
+            }
+        }
+        
         public IssuesDetailsPageViewModel()
         {
             RefreshCommand = new DelegateCommand(Refresh);
@@ -43,5 +61,8 @@ namespace ProjectTimeAssistant.ViewModels
         {
             DataSource.Instance.PullAll();
         }
+
+
     }
+
 }
