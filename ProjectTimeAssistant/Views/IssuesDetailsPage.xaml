@@ -20,23 +20,25 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="150"/>
                 <RowDefinition Height="50"/>
-                <RowDefinition MaxHeight="700"/>
-                <RowDefinition Height="100"/>
+                <RowDefinition MaxHeight="600"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
             <!--profilestamp-->
-            <usercontrols:ProfileUserControl Grid.Row="0" HorizontalAlignment="Right"/>
-            
+            <usercontrols:ProfileUserControl Grid.Row="0" HorizontalAlignment="Right" />
+            <StackPanel Grid.Row="0" Height="80" Orientation="Horizontal" Margin="20" Padding="80,0,80,0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}">
+                <TextBlock Text="Issue details" Margin="10" Foreground="{ThemeResource ApplicationForegroundThemeBrush}"  FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </StackPanel>
 
             <!--table header-->
             <Grid Margin="0" Grid.Row="1" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" HorizontalAlignment="Left">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30"/>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="140"/>
-                    <ColumnDefinition Width="136"/>
+                    <ColumnDefinition Width="195"/>
+                    <ColumnDefinition Width="135"/>
+                    <ColumnDefinition Width="135"/>
                     <ColumnDefinition Width="6"/>
-                    <ColumnDefinition Width="486"/>
+                    <ColumnDefinition Width="499"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Subject" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
                                FontSize="20" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
@@ -50,7 +52,7 @@
             </Grid>
 
             <!--masterdetails-->
-            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="2">
+            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="2" > <!--Kerethez: BorderBrush="{ThemeResource ApplicationForegroundThemeBrush}" BorderThickness="2" MaxWidth="1000" HorizontalAlignment="Left"-->
                 <controls:MasterDetailsView ItemsSource="{Binding List}"
                                     NoSelectionContent="Select an item to view"
                                     Foreground="Black" MasterPaneWidth="500">
@@ -145,7 +147,7 @@
             </Grid>
 
             <!--footer-->
-            <usercontrols:PushPullUserControl VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="3"/>
+            <!--<usercontrols:PushPullUserControl VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="3"/>-->
             <!--<Button Content="Refresh" VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding RefreshCommand}" Grid.Row="3"/>-->
 
         </Grid>

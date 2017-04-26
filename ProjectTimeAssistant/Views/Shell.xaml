@@ -47,7 +47,7 @@
                                 Symbol="List" />
                     <TextBlock Margin="12,0,0,0"
                                VerticalAlignment="Center"
-                               Text="Recent Works" />
+                               Text="Tracked worktimes" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
             

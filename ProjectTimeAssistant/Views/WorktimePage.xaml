@@ -24,20 +24,23 @@
     <Grid Margin="75,5,5,5" Canvas.ZIndex="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition MaxHeight="500"/>
             <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition MaxHeight="600"/>
+            <!--<RowDefinition Height="100"/>-->
         </Grid.RowDefinitions>
 
-            <!--profilestamp-->
-        <usercontrols:ProfileUserControl Grid.Row="0" HorizontalAlignment="Right"/>
+        <!--profilestamp-->
+        <usercontrols:ProfileUserControl Grid.Row="0" HorizontalAlignment="Right" />
+        <StackPanel Grid.Row="0" Height="80" Orientation="Horizontal" Margin="20" Padding="80,0,80,0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}">
+            <TextBlock Text="Tracked worktimes" Margin="10" Foreground="{ThemeResource ApplicationForegroundThemeBrush}"  FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        </StackPanel>
 
-        <ComboBox x:Name="OrderByCombo" Grid.Row="0" Header="Order by:" Width="296" Height="70" SelectedIndex="{Binding SelectedItem, Mode=TwoWay}" SelectedItem="Recent" ItemsSource="{x:Bind OrderingCats}" VerticalAlignment="Center"/>
 
-        <!--SelectionChanged="{Binding OrderCommand}"-->
-        
+        <ComboBox x:Name="OrderByCombo" Grid.Row="1" Header="Order by:" Width="296" Height="70" SelectedIndex="{Binding SelectedItem, Mode=TwoWay}" SelectedItem="Recent" ItemsSource="{x:Bind OrderingCats}" VerticalAlignment="Center" Margin="20,0"/>
+
         <!--table header-->
-        <Grid  Margin="0" Grid.Row="1" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" HorizontalAlignment="Left">
+        <Grid  Margin="0" Grid.Row="2" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" HorizontalAlignment="Left">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30"/>
                 <ColumnDefinition Width="190"/>
@@ -58,7 +61,7 @@
                                FontSize="20" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         </Grid>
 
-        <ListView Width="900" MaxHeight="500" SelectionMode="Single" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding List}" Grid.Row="2">
+        <ListView Width="900" MaxHeight="500" SelectionMode="Single" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding List}" Grid.Row="3" Margin="20">
 
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:WorkTime" >
