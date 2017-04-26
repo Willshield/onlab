@@ -1,5 +1,8 @@
-﻿using ProjectTimeAssistant.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjectTimeAssistant.Models;
+using ProjectTimeAssistant.Services.DataBase;
 using ProjectTimeAssistant.Services.DataService;
+using ProjectTimeAssistant.Services.Tracking;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,6 +30,7 @@ namespace ProjectTimeAssistant.ViewModels
             set { Set(ref allWorkingTime, value); }
         }
 
+        //Not working!!!
         private object selected;
         public object Selected
         {
@@ -42,12 +46,24 @@ namespace ProjectTimeAssistant.ViewModels
         {
             RefreshCommand = new DelegateCommand(Refresh);
             PullCommand = new DelegateCommand(PullAll); //todo: átrakni usercontrolhoz
+            StartTrackingCommand = new DelegateCommand(StartTracking);
 
             //init first and only datasource to pullAll
             DataSource ds = DataSource.Instance;
 
             List = new ObservableCollection<Issue>();
             Refresh();
+        }
+
+        public DelegateCommand StartTrackingCommand { get; }
+        public void StartTracking()
+        {
+            using( var db = new DataContext())
+            {
+                Issue issue = db.Issues.Where(i => i.IssueID == 1).Include(i => i.Project).Single();
+                Tracker.Instance.StartTracking(issue, "comment");
+            }
+
         }
 
         public DelegateCommand RefreshCommand { get; }

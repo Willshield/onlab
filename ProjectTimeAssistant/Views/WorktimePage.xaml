@@ -43,11 +43,11 @@
         <Grid  Margin="0" Grid.Row="2" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" HorizontalAlignment="Left">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="190"/>
+                <ColumnDefinition Width="210"/>
                 <ColumnDefinition Width="145"/>
                 <ColumnDefinition Width="145"/>
                 <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="240"/>
+                <ColumnDefinition Width="220"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Subject" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
                                FontSize="20" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
@@ -61,7 +61,7 @@
                                FontSize="20" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         </Grid>
 
-        <ListView Width="900" MaxHeight="500" SelectionMode="Single" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding List}" Grid.Row="3" Margin="20">
+        <ListView Width="900" MaxHeight="500" SelectionMode="Single" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding List}" Grid.Row="3" Margin="20" SelectedItem="{Binding SelectedWorkTime, Mode=TwoWay}">
 
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:WorkTime" >
@@ -92,6 +92,7 @@
         <!--footer-->
         <!--<usercontrols:PushPullUserControl VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="3"/>-->
         <!--<Button Content="Refresh" VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding RefreshCommand}" Grid.Row="3"/>-->
-
+        <Button Content="Start tracking" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="3" Command="{Binding StartTrackingCommand}"/>
+    
     </Grid>
 </Page>

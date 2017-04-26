@@ -135,6 +135,7 @@
     <Compile Include="Services\Network\RedmineSpecific\TimeEntriesContainer.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="Services\Tracking\Tracker.cs" />
+    <Compile Include="ViewModels\ActuallyTrackingUserControlViewModel.cs" />
     <Compile Include="ViewModels\ActuallyTrackingViewModel.cs" />
     <Compile Include="ViewModels\IssuesDetailsPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />

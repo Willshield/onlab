@@ -5,22 +5,22 @@
     xmlns:local="using:ProjectTimeAssistant.Views.UserControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:ProjectTimeAssistant.ViewModels"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid Margin="0,20,0,20" MinWidth="350" HorizontalAlignment="Center">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="500"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+    <UserControl.DataContext>
+        <vm:ActuallyTrackingUserControlViewModel x:Name="ViewModel" />
+    </UserControl.DataContext>
+
         <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}">
             <TextBlock Text="Actually tracking:" Margin="10" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" />
             <StackPanel Orientation="Vertical" Margin="10" VerticalAlignment="Center">
-                <TextBlock Text="subject" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <TextBlock Text="project" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" MaxLines="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <TextBlock Text="time" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" MaxLines="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding Subject}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding Project}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" MaxLines="1" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding TimeStamp}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" MaxLines="1" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </StackPanel>
         </StackPanel>
-    </Grid>
+        
 </UserControl>

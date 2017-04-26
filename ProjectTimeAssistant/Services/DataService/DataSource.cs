@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
+using Windows.UI.Popups;
 
 namespace ProjectTimeAssistant.Services.DataService
 {
@@ -41,12 +43,18 @@ namespace ProjectTimeAssistant.Services.DataService
 
         public async void PullAll()
         {
-            await FetchData();
-            using (var db = new DataContext())
+            try
             {
-                PullProjects(db);
-                PullIssues(db);
-                PullTimeEntries(db);
+                await FetchData();
+                using (var db = new DataContext())
+                {
+                    PullProjects(db);
+                    PullIssues(db);
+                    PullTimeEntries(db);
+                }
+            } catch (HttpRequestException e)
+            {
+                await new MessageDialog("You are currently not connected to the internet. Syncing data failed. You can use offline mode.", "Network Error").ShowAsync();
             }
         }
 

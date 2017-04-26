@@ -4,12 +4,12 @@
       xmlns:Behaviors="using:Template10.Behaviors"
       xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
       xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
-      
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:ProjectTimeAssistant.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:vm="using:ProjectTimeAssistant.ViewModels"
       xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+      xmlns:usercontrols="using:ProjectTimeAssistant.Views.UserControls"
       xmlns:models="using:ProjectTimeAssistant.Models"
       mc:Ignorable="d">
     <!--xmlns:controls="using:Template10.Controls"-->
@@ -19,6 +19,7 @@
     </Page.DataContext>
 
     <Grid>
+        <usercontrols:ActuallyTrackingUserControl HorizontalAlignment="Center"  VerticalAlignment="Top" />
         <TextBlock Text="{Binding TestText}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
     

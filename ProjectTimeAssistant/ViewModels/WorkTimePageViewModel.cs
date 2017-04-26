@@ -1,4 +1,6 @@
-﻿using ProjectTimeAssistant.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjectTimeAssistant.Models;
+using ProjectTimeAssistant.Services.DataBase;
 using ProjectTimeAssistant.Services.DataService;
 using System;
 using System.Collections.Generic;
@@ -27,7 +29,7 @@ namespace ProjectTimeAssistant.ViewModels
         {
             RefreshCommand = new DelegateCommand(Refresh);
             OrderCommand = new DelegateCommand(Order);
-
+            StartTrackingCommand = new DelegateCommand(StartTracking);
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
                 DataService = new DesignTimeDataService();
@@ -39,10 +41,21 @@ namespace ProjectTimeAssistant.ViewModels
                 SelectedItem = 4;
             }
 
-            //List = new ObservableCollection<WorkTime>();
-            
+        }
+
+        public DelegateCommand StartTrackingCommand { get; }
+        public void StartTracking()
+        {
+            if (SelectedWorkTime == null)
+                return;
+            using (var db = new DataContext())
+            {
+                Issue issue = db.Issues.Where(i => i.IssueID == SelectedWorkTime.IssueID).Include(i => i.Project).Single();
+                Services.Tracking.Tracker.Instance.StartTracking(issue, "comment");
+            }
 
         }
+        public WorkTime SelectedWorkTime { get; set; }
 
         public readonly ObservableCollection<string> OrderingCats;
         private int selectedItem;
