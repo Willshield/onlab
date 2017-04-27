@@ -14,8 +14,14 @@ namespace ProjectTimeAssistant.ViewModels
 {
     public class WorkTimePageViewModel : ViewModelBase
     {
-        private ObservableCollection<WorkTime> list;
 
+        public static readonly int SubjectKey = 0;
+        public static readonly int ProjectNameKey = 1;
+        public static readonly int StartTimeKey = 2;
+        public static readonly int HoursKey = 3;
+        public static readonly int CommentKey = 4;
+
+        private ObservableCollection<WorkTime> list;
         public ObservableCollection<WorkTime> List
         {
             get { return list; }
@@ -28,7 +34,7 @@ namespace ProjectTimeAssistant.ViewModels
         public WorkTimePageViewModel()
         {
             RefreshCommand = new DelegateCommand(Refresh);
-            OrderCommand = new DelegateCommand(Order);
+            //OrderCommand = new DelegateCommand(Order);
             StartTrackingCommand = new DelegateCommand(StartTracking);
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
@@ -38,7 +44,7 @@ namespace ProjectTimeAssistant.ViewModels
             {
                 DataService = DataSource.Instance;
                 Refresh();
-                SelectedItem = 4;
+                //SelectedItem = 4;
             }
 
         }
@@ -58,31 +64,74 @@ namespace ProjectTimeAssistant.ViewModels
         public WorkTime SelectedWorkTime { get; set; }
 
         public readonly ObservableCollection<string> OrderingCats;
-        private int selectedItem;
-        public int SelectedItem { get { return selectedItem; } set { Set(ref selectedItem, value); Order(); } }
         public DelegateCommand RefreshCommand { get; }
         public DelegateCommand OrderCommand { get; }
-        public void Order()
+
+        //private int selectedItem;
+        //public int SelectedItem { get { return selectedItem; } set { Set(ref selectedItem, value); Order(); } }
+        //public void Order()
+        //{
+        //    switch (SelectedItem)
+        //    {
+        //        case 0:
+        //            List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Issue.Subject));
+        //            break;
+        //        case 1:
+        //            List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Issue.Project.Name));
+        //            break;
+        //        case 2:
+        //            List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.StartTime));
+        //            break;
+        //        case 3:
+        //            List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Hours));
+        //            break;
+        //        case 4:
+        //            List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Comment));
+        //            break;
+        //    }  
+        //}
+
+        private int orderCatName;
+        public int OrderCatName
         {
-            switch (SelectedItem)
+            get { return orderCatName; }
+            set { orderCatName = value; }
+        }
+        public void OrderCats(bool byDesc)
+        {
+            switch (OrderCatName)
             {
                 case 0:
-                    List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Issue.Subject));
+                    if (byDesc)
+                    { List = new ObservableCollection<WorkTime>(List.OrderByDescending(i => i.Issue.Subject)); }
+                    else
+                    { List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Issue.Subject)); }
                     break;
                 case 1:
-                    List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Issue.Project.Name));
+                    if (byDesc)
+                    { List = new ObservableCollection<WorkTime>(List.OrderByDescending(i => i.Issue.Project.Name)); }
+                    else
+                    { List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Issue.Project.Name)); }
                     break;
                 case 2:
-                    List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.StartTime));
+                    if (byDesc)
+                    { List = new ObservableCollection<WorkTime>(List.OrderByDescending(i => i.StartTime)); }
+                    else
+                    { List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.StartTime)); }
                     break;
                 case 3:
-                    List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Hours));
+                    if (byDesc)
+                    { List = new ObservableCollection<WorkTime>(List.OrderByDescending(i => i.Hours)); }
+                    else
+                    { List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Hours)); }
                     break;
                 case 4:
-                    List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Comment));
+                    if (byDesc)
+                    { List = new ObservableCollection<WorkTime>(List.OrderByDescending(i => i.Comment)); }
+                    else
+                    { List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Comment)); }
                     break;
             }
-            
         }
 
 

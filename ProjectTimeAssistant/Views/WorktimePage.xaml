@@ -21,23 +21,20 @@
         <conv:DoubleFormatConverter x:Name="DoubleFormatConverter" x:Key="DoubleFormatConverter"/>
     </Page.Resources>
 
-    <Grid Margin="75,5,5,5" Canvas.ZIndex="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Margin="75,5,10,5" Canvas.ZIndex="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="50"/>
             <RowDefinition MaxHeight="600"/>
-            <!--<RowDefinition Height="100"/>-->
+            <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
 
-        <!--profilestamp-->
-        <usercontrols:ProfileUserControl Grid.Row="0" HorizontalAlignment="Right" />
-        <StackPanel Grid.Row="0" Height="80" Orientation="Horizontal" Margin="20" Padding="80,0,80,0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}">
-            <TextBlock Text="Tracked worktimes" Margin="10" Foreground="{ThemeResource ApplicationForegroundThemeBrush}"  FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
-        </StackPanel>
 
+        <!--header-->
+        <usercontrols:TitledPageHeader Grid.Row="0" Label="Tracked worktimes" />
 
-        <ComboBox x:Name="OrderByCombo" Grid.Row="1" Header="Order by:" Width="296" Height="70" SelectedIndex="{Binding SelectedItem, Mode=TwoWay}" SelectedItem="Recent" ItemsSource="{x:Bind OrderingCats}" VerticalAlignment="Center" Margin="20,0"/>
+        <!--<ComboBox x:Name="OrderByCombo" Grid.Row="1" Header="Order by:" Width="296" Height="70" SelectedIndex="{Binding SelectedItem, Mode=TwoWay}" SelectedItem="Recent" ItemsSource="{x:Bind OrderingCats}" VerticalAlignment="Center" Margin="20,0"/>-->
 
         <!--table header-->
         <Grid  Margin="0" Grid.Row="2" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" HorizontalAlignment="Left">
@@ -49,16 +46,16 @@
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="220"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Subject" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
-                               FontSize="20" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <TextBlock Text="Project" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
-                               FontSize="20" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <TextBlock Text="Work started" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
-                               FontSize="20" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <TextBlock Text="Hours worked" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
-                               FontSize="20" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <TextBlock Text="Comment" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
-                               FontSize="20" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBlock Name="Subject" Text="Subject" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="20" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Tapped="OrderData"/>
+            <TextBlock Name="Project" Text="Project" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="20" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Tapped="OrderData"/>
+            <TextBlock Name="StartTime" Text="Work started" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="20" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Tapped="OrderData"/>
+            <TextBlock Name="Hours" Text="Hours worked" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="20" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" Tapped="OrderData"/>
+            <TextBlock Name="Comment" Text="Comment" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="20" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Tapped="OrderData"/>
         </Grid>
 
         <ListView Width="900" MaxHeight="500" SelectionMode="Single" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding List}" Grid.Row="3" Margin="20" SelectedItem="{Binding SelectedWorkTime, Mode=TwoWay}">
@@ -90,9 +87,7 @@
         </ListView>
 
         <!--footer-->
-        <!--<usercontrols:PushPullUserControl VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="3"/>-->
-        <!--<Button Content="Refresh" VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding RefreshCommand}" Grid.Row="3"/>-->
-        <Button Content="Start tracking" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="3" Command="{Binding StartTrackingCommand}"/>
-    
+        <Button Content="Start tracking" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="4" Command="{Binding StartTrackingCommand}"/>
+        <usercontrols:ActuallyTrackingUserControl HorizontalAlignment="Center"  VerticalAlignment="Center"  Grid.Row="4"/>
     </Grid>
 </Page>

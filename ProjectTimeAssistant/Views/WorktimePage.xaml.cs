@@ -38,9 +38,42 @@ namespace ProjectTimeAssistant.Views
 
         }
 
-        //private void selectChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    ViewModel.Order();
-        //}
+        private bool OrderbyDesc = false;
+        private void OrderData(object sender, TappedRoutedEventArgs e)
+        {
+            TextBlock ClickedBox = sender as TextBlock;
+            SetNormalOpícity();
+            ClickedBox.Opacity = 0.6;
+            switch (ClickedBox.Name)
+            {
+                case "Subject":
+                    ViewModel.OrderCatName = ViewModels.WorkTimePageViewModel.SubjectKey;
+                    break;
+                case "Project":
+                    ViewModel.OrderCatName = ViewModels.WorkTimePageViewModel.ProjectNameKey;
+                    break;
+                case "StartTime":
+                    ViewModel.OrderCatName = ViewModels.WorkTimePageViewModel.ProjectNameKey;
+                    break;
+                case "Hours":
+                    ViewModel.OrderCatName = ViewModels.WorkTimePageViewModel.HoursKey;
+                    break;
+                case "Comment":
+                    ViewModel.OrderCatName = ViewModels.WorkTimePageViewModel.CommentKey;
+                    break;
+            }
+            ViewModel.OrderCats(OrderbyDesc);
+            OrderbyDesc = !OrderbyDesc;
+        }
+
+        private void SetNormalOpícity()
+        {
+            Subject.Opacity = 1;
+            Project.Opacity = 1;
+            StartTime.Opacity = 1;
+            Hours.Opacity = 1;
+            Comment.Opacity = 1;
+        }
+
     }
 }

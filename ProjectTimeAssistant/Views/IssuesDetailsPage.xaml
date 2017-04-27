@@ -16,19 +16,17 @@
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid Margin="75,5,5,5" Canvas.ZIndex="1">
+        <Grid Margin="75,5,10,5" Canvas.ZIndex="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="150"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition MaxHeight="600"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="75"/>
             </Grid.RowDefinitions>
 
-            <!--profilestamp-->
-            <usercontrols:ProfileUserControl Grid.Row="0" HorizontalAlignment="Right" />
-            <Grid Grid.Row="0" Height="80" Width="450" Margin="20" Padding="80,0,80,0" VerticalAlignment="Center" HorizontalAlignment="Left" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}">
-                <TextBlock Text="Issue details" Margin="10" Foreground="{ThemeResource ApplicationForegroundThemeBrush}"  FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" />
-            </Grid>
+            <!--header-->
+            <usercontrols:TitledPageHeader Grid.Row="0" Label="Issue details" />
+
 
             <!--table header-->
             <Grid Margin="0" Grid.Row="1" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" HorizontalAlignment="Left">
@@ -65,7 +63,7 @@
                                     <ColumnDefinition Width="140"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="{x:Bind Subject }" Style="{ThemeResource SubtitleTextBlockStyle}" VerticalAlignment="Center" Grid.Column="0"  FontSize="18"/>
-                                <TextBlock Text="{x:Bind Project.Name}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="Blue" Opacity=".6" MaxLines="1" VerticalAlignment="Center" Grid.Column="1"  FontSize="18"/>
+                                <TextBlock Text="{x:Bind Project.Name}" Style="{ThemeResource BodyTextBlockStyle}" Opacity=".6" MaxLines="1" VerticalAlignment="Center" Grid.Column="1"  FontSize="18"/>
                                 <TextBlock Text="{x:Bind Tracker}" Style="{ThemeResource BodyTextBlockStyle}" Opacity=".6" MaxLines="1" VerticalAlignment="Center" Grid.Column="2"  FontSize="18"/>
                             </Grid>
                         </DataTemplate>
@@ -147,10 +145,8 @@
             </Grid>
 
             <!--footer-->
-            <!--<usercontrols:PushPullUserControl VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="3"/>-->
-            <!--<Button Content="Refresh" VerticalAlignment="Bottom" HorizontalAlignment="Center" Command="{Binding RefreshCommand}" Grid.Row="3"/>-->
-            <Button Content="Start tracking" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="3" Command="{Binding StartTrackingCommand}"/>
-
+            <Button Content="Start tracking" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="3" Command="{Binding StartTrackingCommand}"/>
+            <usercontrols:ActuallyTrackingUserControl HorizontalAlignment="Center"  VerticalAlignment="Center"  Grid.Row="3"/>
         </Grid>
     </Grid>
 </Page>

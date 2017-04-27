@@ -27,5 +27,6 @@ namespace ProjectTimeAssistant.Views.UserControls
             this.InitializeComponent();
             profile = Services.SettingsServices.SettingsService.Instance.Profile;
         }
+
     }
 }
