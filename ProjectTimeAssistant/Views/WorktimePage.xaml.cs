@@ -53,7 +53,7 @@ namespace ProjectTimeAssistant.Views
                     ViewModel.OrderCatName = ViewModels.WorkTimePageViewModel.ProjectNameKey;
                     break;
                 case "StartTime":
-                    ViewModel.OrderCatName = ViewModels.WorkTimePageViewModel.ProjectNameKey;
+                    ViewModel.OrderCatName = ViewModels.WorkTimePageViewModel.StartTimeKey;
                     break;
                 case "Hours":
                     ViewModel.OrderCatName = ViewModels.WorkTimePageViewModel.HoursKey;
