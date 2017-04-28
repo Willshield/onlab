@@ -28,5 +28,34 @@ namespace ProjectTimeAssistant.Views
         {
             this.InitializeComponent();
         }
+
+        private bool OrderbyDesc = false;
+        private void OrderData(object sender, TappedRoutedEventArgs e)
+        {
+            TextBlock ClickedBox = sender as TextBlock;
+            SetNormalOpícity();
+            ClickedBox.Opacity = 0.6;
+            switch (ClickedBox.Name)
+            {
+                case "Subject":
+                    ViewModel.OrderCatName = ViewModels.IssuesDetailsPageViewModel.SubjectKey;
+                    break;
+                case "ProjectName":
+                    ViewModel.OrderCatName = ViewModels.IssuesDetailsPageViewModel.ProjectNameKey;
+                    break;
+                case "Tracker":
+                    ViewModel.OrderCatName = ViewModels.IssuesDetailsPageViewModel.TrackerKey;
+                    break;
+            }
+            ViewModel.OrderCats(OrderbyDesc);
+            OrderbyDesc = !OrderbyDesc;
+        }
+
+        private void SetNormalOpícity()
+        {
+            Subject.Opacity = 1;
+            ProjectName.Opacity = 1;
+            Tracker.Opacity = 1;
+        }
     }
 }

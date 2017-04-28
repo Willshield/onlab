@@ -38,11 +38,11 @@
                     <ColumnDefinition Width="6"/>
                     <ColumnDefinition Width="499"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Subject" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                <TextBlock Tapped="OrderData" Name="Subject" Text="Subject" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
                                FontSize="20" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <TextBlock Text="Project" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                <TextBlock Tapped="OrderData" Name="ProjectName" Text="Project" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
                                FontSize="20" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <TextBlock Text="Tracker" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                <TextBlock Tapped="OrderData" Name="Tracker" Text="Tracker" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
                                FontSize="20" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <Rectangle VerticalAlignment="Center" Width="4" Height="48" Grid.Column="4" Fill="{ThemeResource ApplicationForegroundThemeBrush}" />
                 <TextBlock Text="Details" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 

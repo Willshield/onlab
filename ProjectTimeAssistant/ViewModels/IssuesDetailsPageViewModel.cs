@@ -15,8 +15,12 @@ namespace ProjectTimeAssistant.ViewModels
 {
     class IssuesDetailsPageViewModel : ViewModelBase
     {
-        private ObservableCollection<Issue> list;
 
+        public static readonly int SubjectKey = 0;
+        public static readonly int ProjectNameKey = 1;
+        public static readonly int TrackerKey = 2;
+
+        private ObservableCollection<Issue> list;
         public ObservableCollection<Issue> List
         {
             get { return list; }
@@ -78,6 +82,36 @@ namespace ProjectTimeAssistant.ViewModels
             DataSource.Instance.PullAll();
         }
 
+        private int orderCatName;
+        public int OrderCatName
+        {
+            get { return orderCatName; }
+            set { orderCatName = value; }
+        }
+        public void OrderCats(bool byDesc)
+        {
+            switch (OrderCatName)
+            {
+                case 0:
+                    if (byDesc)
+                    { List = new ObservableCollection<Issue>(List.OrderByDescending(i => i.Subject)); }
+                    else
+                    { List = new ObservableCollection<Issue>(List.OrderBy(i => i.Subject)); }
+                    break;
+                case 1:
+                    if (byDesc)
+                    { List = new ObservableCollection<Issue>(List.OrderByDescending(i => i.Project.Name)); }
+                    else
+                    { List = new ObservableCollection<Issue>(List.OrderBy(i => i.Project.Name)); }
+                    break;
+                case 2:
+                    if (byDesc)
+                    { List = new ObservableCollection<Issue>(List.OrderByDescending(i => i.Tracker)); }
+                    else
+                    { List = new ObservableCollection<Issue>(List.OrderBy(i => i.Tracker)); }
+                    break;
+            }
+        }
 
     }
 

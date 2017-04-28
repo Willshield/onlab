@@ -34,7 +34,6 @@ namespace ProjectTimeAssistant.ViewModels
         public WorkTimePageViewModel()
         {
             RefreshCommand = new DelegateCommand(Refresh);
-            //OrderCommand = new DelegateCommand(Order);
             StartTrackingCommand = new DelegateCommand(StartTracking);
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
@@ -44,7 +43,6 @@ namespace ProjectTimeAssistant.ViewModels
             {
                 DataService = DataSource.Instance;
                 Refresh();
-                //SelectedItem = 4;
             }
 
         }
@@ -66,30 +64,6 @@ namespace ProjectTimeAssistant.ViewModels
         public readonly ObservableCollection<string> OrderingCats;
         public DelegateCommand RefreshCommand { get; }
         public DelegateCommand OrderCommand { get; }
-
-        //private int selectedItem;
-        //public int SelectedItem { get { return selectedItem; } set { Set(ref selectedItem, value); Order(); } }
-        //public void Order()
-        //{
-        //    switch (SelectedItem)
-        //    {
-        //        case 0:
-        //            List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Issue.Subject));
-        //            break;
-        //        case 1:
-        //            List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Issue.Project.Name));
-        //            break;
-        //        case 2:
-        //            List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.StartTime));
-        //            break;
-        //        case 3:
-        //            List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Hours));
-        //            break;
-        //        case 4:
-        //            List = new ObservableCollection<WorkTime>(List.OrderBy(i => i.Comment));
-        //            break;
-        //    }  
-        //}
 
         private int orderCatName;
         public int OrderCatName
