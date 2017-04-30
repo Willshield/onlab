@@ -115,6 +115,10 @@
     <Compile Include="Migrations\20170424012842_WorkTimeDirtyAddedMigration.designer.cs">
       <DependentUpon>20170424012842_WorkTimeDirtyAddedMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20170430212651_FavouriteBoolAdded.cs" />
+    <Compile Include="Migrations\20170430212651_FavouriteBoolAdded.designer.cs">
+      <DependentUpon>20170430212651_FavouriteBoolAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DataContextModelSnapshot.cs" />
     <Compile Include="Models\Issue.cs" />
     <Compile Include="Models\Profile.cs" />

@@ -92,8 +92,8 @@
                     <Button Name="Abort" Command="{Binding AbortCommand}" Content="Abort tracking" HorizontalAlignment="Center" Width="170" Margin="5"/>
                 </StackPanel>
                 <StackPanel Grid.Column="2" VerticalAlignment="Center" >
-                    <Button Name="Restart" Command="{Binding StopSaveCommand}" Content="Restart" HorizontalAlignment="Center" Width="170" Margin="5"/>
-                    <Button Name="Pause" Command="{Binding AbortCommand}" Content="Pause" HorizontalAlignment="Center" Width="170" Margin="5"/>
+                    <Button Name="Restart" Command="{Binding RestartCommand}" Content="Restart" HorizontalAlignment="Center" Width="170" Margin="5"/>
+                    <Button Name="Pause" Command="{Binding PauseCommand}" Content="Pause" HorizontalAlignment="Center" Width="170" Margin="5"/>
                 </StackPanel>
             </Grid>
 

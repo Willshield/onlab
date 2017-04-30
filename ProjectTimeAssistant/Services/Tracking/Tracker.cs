@@ -89,6 +89,7 @@ namespace ProjectTimeAssistant.Services.Tracking
             get { return TrackedIssue.Subject; }
         }
 
+        public bool IsTracking { get { return stopWatch.IsEnabled; } }
         private bool paused = false;
         public bool Paused { get { return paused; } }
 
@@ -116,7 +117,7 @@ namespace ProjectTimeAssistant.Services.Tracking
             }
         }
 
-        public async void AskStartTracking(Issue issue, string comment)
+        public async Task AskStartTracking(Issue issue, string comment)
         {
             bool cond = await TrySetIssue(issue);
             if (cond)
@@ -162,7 +163,7 @@ namespace ProjectTimeAssistant.Services.Tracking
                     return false;
                 } else if (cmd.Label == PopupService.YES)
                 {
-                    AskStopTracking();
+                    StopSaveTracking();
                     TrackedIssue = issue;
                     return true;
                 }
@@ -181,7 +182,7 @@ namespace ProjectTimeAssistant.Services.Tracking
             return TrackedIssue;
         }
 
-        public async void AskStopTracking()
+        public async Task AskStopTracking()
         {
             if (stopWatch.IsEnabled || paused == true)
             {
@@ -191,16 +192,16 @@ namespace ProjectTimeAssistant.Services.Tracking
                     var cmd = await dialog.ShowAsync();
                     if (cmd.Label == "Yes")
                     {
-                        StopTracking();
+                        StopSaveTracking();
                     }
-                }else { StopTracking(); }
+                }else { StopSaveTracking(); }
             } else
             {
                 await popupService.GetDefaultNotification("There's no tracked issue right now.", "Nothing to stop and save").ShowAsync();
             }
         }
 
-        private void StopTracking()
+        private void StopSaveTracking()
         {
             stopWatch.Stop();
             paused = false;
@@ -217,7 +218,7 @@ namespace ProjectTimeAssistant.Services.Tracking
             NewTracking();
         }
 
-        public async void AskAbortTracking()
+        public async Task AskAbortTracking()
         {
             if (stopWatch.IsEnabled || paused == true)
             {
@@ -254,12 +255,15 @@ namespace ProjectTimeAssistant.Services.Tracking
             }
         }
 
-        public void RestartTracking()
+        public async Task RestartTracking()
         {
             if (!stopWatch.IsEnabled && paused == true)
             {
                 stopWatch.Start();
                 paused = false;
+            } else if (!stopWatch.IsEnabled && paused == false)
+            {
+               await AskStartTracking(lastTracked, "");
             }
         }
 

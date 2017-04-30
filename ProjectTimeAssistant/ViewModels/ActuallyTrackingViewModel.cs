@@ -17,8 +17,10 @@ namespace ProjectTimeAssistant.ViewModels
 
         public ActuallyTrackingViewModel()
         {
-            AbortCommand = new DelegateCommand(AbortTracking);
-            StopSaveCommand = new DelegateCommand(StopSaveTracking);
+            AbortCommand = new DelegateCommand(AbortTracking, CanAbort);
+            StopSaveCommand = new DelegateCommand(StopSaveTracking, CanStopSave);
+            RestartCommand = new DelegateCommand(RestartTracking, CanRestart);
+            PauseCommand = new DelegateCommand(PauseTracking, CanPause);
 
             tracker = Tracker.Instance;
             timeStamp = "00:00:00";
@@ -78,15 +80,48 @@ namespace ProjectTimeAssistant.ViewModels
         }
 
         public DelegateCommand AbortCommand { get; }
-        public void AbortTracking()
+        public async void AbortTracking()
         {
-            tracker.AskAbortTracking();
+            await tracker.AskAbortTracking();
+            RaiseCanExecuteChangedEvents();
+        }
+
+        public bool CanAbort()
+        {
+            return tracker.IsTracking || tracker.Paused;
         }
 
         public DelegateCommand StopSaveCommand { get; }
-        public  void StopSaveTracking()
+        public async void StopSaveTracking()
         {
-            tracker.AskStopTracking();
+            await tracker.AskStopTracking();
+            RaiseCanExecuteChangedEvents();
+        }
+        public bool CanStopSave()
+        {
+            return tracker.IsTracking || tracker.Paused;
+        }
+
+        public DelegateCommand RestartCommand { get; }
+        public async void RestartTracking()
+        {
+            await tracker.RestartTracking();
+            RaiseCanExecuteChangedEvents();
+        }
+        public bool CanRestart()
+        {
+            return (tracker.Paused && !tracker.IsTracking) || (!tracker.Paused && !tracker.IsTracking && (tracker.LastTracked != null));
+        }
+
+        public DelegateCommand PauseCommand { get; }
+        public void PauseTracking()
+        {
+            tracker.PauseTracking();
+            RaiseCanExecuteChangedEvents();
+        }
+        public bool CanPause()
+        {
+            return tracker.IsTracking;
         }
 
         public string Description
@@ -107,6 +142,15 @@ namespace ProjectTimeAssistant.ViewModels
         public string Subject
         {
             get { return tracker.IssueSubject; }
+        }
+
+
+        private void RaiseCanExecuteChangedEvents()
+        {
+            PauseCommand.RaiseCanExecuteChanged();
+            RestartCommand.RaiseCanExecuteChanged();
+            AbortCommand.RaiseCanExecuteChanged();
+            StopSaveCommand.RaiseCanExecuteChanged();
         }
 
 

@@ -48,12 +48,13 @@ namespace ProjectTimeAssistant.ViewModels
         }
 
         public DelegateCommand StartTrackingCommand { get; }
-        public void StartTracking()
+        public async void StartTracking()
         {
             if (SelectedWorkTime == null)
                 return;
 
-            DataService.GetIssueById(SelectedWorkTime.IssueID).StartTracking();
+            await DataService.GetIssueById(SelectedWorkTime.IssueID).StartTracking(null);
+            NavigationService.Navigate(typeof(Views.ActuallyTrackingPage));
         }
         public WorkTime SelectedWorkTime { get; set; }
 

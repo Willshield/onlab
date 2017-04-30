@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
+using Template10.Mvvm;
 
 namespace ProjectTimeAssistant.Models
 {
@@ -17,16 +18,8 @@ namespace ProjectTimeAssistant.Models
         public string Tracker
         {
             get { return tracker; }
-            //TODO: validators
             set { tracker = value; }
         }
-
-        //private string project;
-        //public string Project
-        //{
-        //    get { return project; }
-        //    set { project = value; }
-        //}
 
         private string subject;
         public string Subject
@@ -49,9 +42,7 @@ namespace ProjectTimeAssistant.Models
             set { dirty = value; }
         }
 
-        //kapcsolat
-        public List<WorkTime> WorkTimes { get; set; }
-        
+        public bool IsFavourite { get; set; }
 
         public string Priority
         {
@@ -59,7 +50,6 @@ namespace ProjectTimeAssistant.Models
             set;
         }
 
-        //TODO:
         public DateTime Updated
         {
             get;
@@ -69,7 +59,7 @@ namespace ProjectTimeAssistant.Models
         //Navigation
         public int ProjectID { get; set; }
         public Project Project { get; set; }
-
+        public List<WorkTime> WorkTimes { get; set; }
 
         //Methods, and properties:
         [NotMapped] 
@@ -82,10 +72,10 @@ namespace ProjectTimeAssistant.Models
         }
 
         [NotMapped]
-        public Template10.Mvvm.DelegateCommand TrackingCommand { get { return new Template10.Mvvm.DelegateCommand(StartTracking); } }
-        public void StartTracking()
+        public Template10.Mvvm.AwaitableDelegateCommand TrackingCommand { get { return new Template10.Mvvm.AwaitableDelegateCommand(StartTracking); } }
+        public async Task StartTracking(AwaitableDelegateCommandParameter arg)
         {
-            Services.Tracking.Tracker.Instance.AskStartTracking(this, "");
+            await Services.Tracking.Tracker.Instance.AskStartTracking(this, "");
         }
 
 
