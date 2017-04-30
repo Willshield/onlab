@@ -31,14 +31,14 @@ namespace ProjectTimeAssistant.ViewModels
 
         private void getData()
         {
-
-            //RedmineService networkService = new RedmineService();
-            //IssueContainer container = await networkService.GetIssuesAsync();
-            //TestText = container.issues[0].tracker.name;
             var _settings = Services.SettingsServices.SettingsService.Instance;
             TestText = _settings.Rounding.ToString();
         }
 
+
+
+
+        //Navigation services
         //string _Value = "Gas";
         //public string Value { get { return _Value; } set { Set(ref _Value, value); } }
 

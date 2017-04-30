@@ -27,59 +27,20 @@ namespace ProjectTimeAssistant.ViewModels
             set { Set(ref list, value); }
         }
 
-        private double allWorkingTime;
-        public double AllWorkingTimes
-        {
-            get { return allWorkingTime; }
-            set { Set(ref allWorkingTime, value); }
-        }
-
-        //Not working!!!
-        private object selected;
-        public object Selected
-        {
-            get { return selected; }
-            set
-            {
-                Set(ref selected, value);
-                AllWorkingTimes = DataSource.Instance.getAllWorkingTime(value as Issue);
-            }
-        }
+        IDataService DataService;
         
         public IssuesDetailsPageViewModel()
         {
-            RefreshCommand = new DelegateCommand(Refresh);
-            PullCommand = new DelegateCommand(PullAll); //todo: átrakni usercontrolhoz
-            StartTrackingCommand = new DelegateCommand(StartTracking);
 
-            //init first and only datasource to pullAll
-            DataSource ds = DataSource.Instance;
+            DataService = DataSource.Instance;
 
             List = new ObservableCollection<Issue>();
             Refresh();
         }
 
-        public DelegateCommand StartTrackingCommand { get; }
-        public void StartTracking()
-        {
-            using( var db = new DataContext())
-            {
-                Issue issue = db.Issues.Where(i => i.IssueID == 1).Include(i => i.Project).Single();
-                Tracker.Instance.StartTracking(issue, "comment");
-            }
-
-        }
-
-        public DelegateCommand RefreshCommand { get; }
         public void Refresh()
         {
             List = DataSource.Instance.getIssues();
-        }
-
-        public DelegateCommand PullCommand { get; }
-        public void PullAll()
-        {
-            DataSource.Instance.PullAll();
         }
 
         private int orderCatName;

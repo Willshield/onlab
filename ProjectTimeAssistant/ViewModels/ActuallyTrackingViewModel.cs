@@ -23,6 +23,14 @@ namespace ProjectTimeAssistant.ViewModels
             tracker = Tracker.Instance;
             timeStamp = "00:00:00";
             tracker.TimeChanged += TimeChangedEventHandler;
+            tracker.NewTracking += RefreshDisplayedData;
+        }
+
+        public void RefreshDisplayedData()
+        {
+            Comment = "";
+            TimeStamp = "00:00:00";
+
         }
 
         private void TimeChangedEventHandler(TimeSpan t)
@@ -91,7 +99,7 @@ namespace ProjectTimeAssistant.ViewModels
                 {
                     tracker.AbortTracking();
                 }
-                //todo: nullázd ki a kiírtakat abort esetén
+
             }
             else
             {
@@ -116,8 +124,10 @@ namespace ProjectTimeAssistant.ViewModels
                     {
                         tracker.StopTracking();
                     }
-                }
+                } else
+                {
                     tracker.StopTracking();
+                }
             }
             else
             {

@@ -9,11 +9,16 @@
     xmlns:models="using:ProjectTimeAssistant.Models"
     xmlns:usercontrols="using:ProjectTimeAssistant.Views.UserControls"
     xmlns:vm="using:ProjectTimeAssistant.ViewModels"
+    xmlns:conv="using:ProjectTimeAssistant.DataValueConverters" 
     mc:Ignorable="d">
 
     <Page.DataContext>
         <vm:IssuesDetailsPageViewModel x:Name="ViewModel" />
     </Page.DataContext>
+    <Page.Resources>
+        <conv:DateFormatConverter x:Name="DateFormatConverter" x:Key="DateFormatConverter"/>
+        <conv:DoubleFormatConverter x:Name="DoubleFormatConverter" x:Key="DoubleFormatConverter"/>
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid Margin="75,5,10,5" Canvas.ZIndex="1">
@@ -50,7 +55,7 @@
             </Grid>
 
             <!--masterdetails-->
-            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="2" > <!--Kerethez: BorderBrush="{ThemeResource ApplicationForegroundThemeBrush}" BorderThickness="2" MaxWidth="1000" HorizontalAlignment="Left"-->
+            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="2" >
                 <controls:MasterDetailsView ItemsSource="{Binding List}" SelectedItem="{Binding Selected, Mode=TwoWay}" 
                                     NoSelectionContent="Select an item to view"
                                     Foreground="Black" MasterPaneWidth="500">
@@ -82,7 +87,7 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel Orientation="Horizontal" Grid.Row="0">
                                     <TextBlock Text="All tracked worktime:" Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" Opacity=".6" MaxLines="1" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding AllWorkingTime, Mode=TwoWay}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="15" VerticalAlignment="Center" Margin="10,0,0,0" />
+                                    <TextBlock Text="{Binding AllTrackedTime, Converter={StaticResource DoubleFormatConverter}}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="15" VerticalAlignment="Center" Margin="10,0,0,0" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Grid.Row="1">
                                     <TextBlock Text="Priority:" Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" Opacity=".6" MaxLines="1" VerticalAlignment="Center"/>
@@ -90,7 +95,7 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Grid.Row="2">
                                     <TextBlock Text="Updated:" Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" Opacity=".6" MaxLines="1" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding Updated}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="15" VerticalAlignment="Center"  Margin="10,0,0,0"/>
+                                    <TextBlock Text="{Binding Updated, Converter={StaticResource DateFormatConverter}}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="15" VerticalAlignment="Center"  Margin="10,0,0,0"/>
                                 </StackPanel>
                                 <TextBlock Text="Description" Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" Opacity=".6" MaxLines="1" VerticalAlignment="Center" Grid.Row="3"/>
                                 <ScrollViewer VerticalScrollMode="Enabled" HorizontalScrollMode="Disabled" Height="100" Grid.Row="4">
@@ -106,7 +111,7 @@
                                         <TextBlock Grid.Column="1" Text="Set as favourite" FontSize="16" VerticalAlignment="Center" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" />
                                     </Grid>
                                 </Button>
-                                <Button Content="Start tracking" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="5" Command="{Binding StartTrackingCommand}"/>
+                                <Button Content="Start tracking" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="5" Command="{Binding TrackingCommand}"/>
                             </Grid>
                         </DataTemplate>
                     </controls:MasterDetailsView.DetailsTemplate>
@@ -145,7 +150,6 @@
             </Grid>
 
             <!--footer-->
-            <Button Content="Start tracking" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="3" Command="{Binding StartTrackingCommand}"/>
             <usercontrols:ActuallyTrackingUserControl HorizontalAlignment="Center"  VerticalAlignment="Center"  Grid.Row="3"/>
         </Grid>
     </Grid>

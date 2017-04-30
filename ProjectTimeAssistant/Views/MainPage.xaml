@@ -12,7 +12,6 @@
       xmlns:usercontrols="using:ProjectTimeAssistant.Views.UserControls"
       xmlns:models="using:ProjectTimeAssistant.Models"
       mc:Ignorable="d">
-    <!--xmlns:controls="using:Template10.Controls"-->
     
     <Page.DataContext>
         <vm:MainPageViewModel x:Name="ViewModel" />

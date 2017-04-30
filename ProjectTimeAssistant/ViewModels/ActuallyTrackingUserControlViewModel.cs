@@ -16,7 +16,7 @@ namespace ProjectTimeAssistant.ViewModels
             timeStamp = "00:00:00";
             tracker.TimeChanged += TimeChangedEventHandler;
             tracker.NewTracking += SetDisplayedData;
-
+            SetDisplayedData();
         }
 
         public string subject = "No tracked issue";
@@ -35,7 +35,7 @@ namespace ProjectTimeAssistant.ViewModels
 
         public void SetDisplayedData()
         {
-            Subject = tracker.IssueSubject;
+            Subject = tracker.IssueSubject is null ? "No tracked issue": tracker.IssueSubject;
             Project = tracker.ProjectName;
         }
 

@@ -52,12 +52,8 @@ namespace ProjectTimeAssistant.ViewModels
         {
             if (SelectedWorkTime == null)
                 return;
-            using (var db = new DataContext())
-            {
-                Issue issue = db.Issues.Where(i => i.IssueID == SelectedWorkTime.IssueID).Include(i => i.Project).Single();
-                Services.Tracking.Tracker.Instance.StartTracking(issue, "comment");
-            }
 
+            DataService.GetIssueById(SelectedWorkTime.IssueID).StartTracking();
         }
         public WorkTime SelectedWorkTime { get; set; }
 

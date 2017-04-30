@@ -15,6 +15,7 @@ namespace ProjectTimeAssistant.Services.DataService
         Issue getActuallyTracked();
         void AddTimeEntry(WorkTime workTime);
         double getAllWorkingTime(Issue issue);
+        Issue GetIssueById(int id);
     }
 
 }

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 
 namespace ProjectTimeAssistant.Models
 {
@@ -70,16 +71,23 @@ namespace ProjectTimeAssistant.Models
         public Project Project { get; set; }
 
 
-        //Methods:
-        [NotMapped] //cant reach.............
+        //Methods, and properties:
+        [NotMapped] 
         public double AllTrackedTime
         {
             get
             {
-                var t = WorkTimes.Where(wt => wt.IssueID == this.IssueID).Sum(wt => wt.Hours);
-                return t;
+                return DataSource.Instance.getAllWorkingTime(this);
             }
         }
+
+        [NotMapped]
+        public Template10.Mvvm.DelegateCommand TrackingCommand { get { return new Template10.Mvvm.DelegateCommand(StartTracking); } }
+        public void StartTracking()
+        {
+            Services.Tracking.Tracker.Instance.AskStartTracking(this, "");
+        }
+
 
     }
 }

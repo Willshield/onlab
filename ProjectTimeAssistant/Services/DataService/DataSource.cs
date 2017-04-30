@@ -131,12 +131,11 @@ namespace ProjectTimeAssistant.Services.DataService
                     exists.IssueID = timeEntry.IssueID;
                     exists.WorkTimeID = timeEntry.WorkTimeID;
                     exists.StartTime = timeEntry.StartTime;
-                    exists.FinishTime = timeEntry.FinishTime; //todo
+                    exists.FinishTime = timeEntry.FinishTime;
 
                     var issue = db.Issues.Where(i => i.IssueID == timeEntry.IssueID).Single();
                     exists.Issue = issue;
-
-                    //Todo: set dirty
+                    exists.Dirty = false;
                 }
             }
             db.SaveChanges();
@@ -190,6 +189,14 @@ namespace ProjectTimeAssistant.Services.DataService
             using (var db = new DataContext())
             {
                 return db.WorkTimes.Where(wt => wt.IssueID == issue.IssueID).Sum(wt => wt.Hours);
+            }
+        }
+
+        public Issue GetIssueById(int id)
+        {
+            using (var db = new DataContext())
+            {
+                return db.Issues.Where(i => i.IssueID == id).Include(i => i.Project).Single();
             }
         }
 
