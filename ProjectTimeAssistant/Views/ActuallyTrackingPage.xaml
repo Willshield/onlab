@@ -76,7 +76,8 @@
 
             <Grid Grid.Row="5" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions >
-                    <ColumnDefinition Width="600" />
+                    <ColumnDefinition Width="400" />
+                    <ColumnDefinition Width="200" />
                     <ColumnDefinition Width="200" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -84,11 +85,15 @@
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="You are working for:" Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" Opacity=".6" MaxLines="1" VerticalAlignment="Center" Grid.Column="0"/>
-                <TextBlock Text="{Binding TimeStamp}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" MaxLines="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Grid.Column="0"/>
+                <TextBlock Text="{Binding TimeStamp}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" MaxLines="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20,0" FontSize="40" Grid.Column="0"/>
 
                 <StackPanel Grid.Column="1" VerticalAlignment="Center" >
                     <Button Name="StopSave" Command="{Binding StopSaveCommand}" Content="Stop and save tracking" HorizontalAlignment="Center" Width="170" Margin="5"/>
                     <Button Name="Abort" Command="{Binding AbortCommand}" Content="Abort tracking" HorizontalAlignment="Center" Width="170" Margin="5"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" VerticalAlignment="Center" >
+                    <Button Name="Restart" Command="{Binding StopSaveCommand}" Content="Restart" HorizontalAlignment="Center" Width="170" Margin="5"/>
+                    <Button Name="Pause" Command="{Binding AbortCommand}" Content="Pause" HorizontalAlignment="Center" Width="170" Margin="5"/>
                 </StackPanel>
             </Grid>
 

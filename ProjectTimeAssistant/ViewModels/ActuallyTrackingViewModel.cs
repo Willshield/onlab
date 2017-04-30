@@ -78,61 +78,15 @@ namespace ProjectTimeAssistant.ViewModels
         }
 
         public DelegateCommand AbortCommand { get; }
-        public async void AbortTracking()
+        public void AbortTracking()
         {
-            if (tracker.TrackingOn)
-            {
-                if (SettingsService.Instance.AskIfStop)
-                {
-                    MessageDialog dialog = new MessageDialog("Are you sure? Aborting will reset all worktime.", "Abort Tracking");
-                    dialog.Commands.Add(new UICommand("Yes", null));
-                    dialog.Commands.Add(new UICommand("No", null));
-                    dialog.DefaultCommandIndex = 0;
-                    dialog.CancelCommandIndex = 1;
-                    var cmd = await dialog.ShowAsync();
-                    if (cmd.Label == "Yes")
-                    {
-                        tracker.AbortTracking();
-                    }
-                }
-                else
-                {
-                    tracker.AbortTracking();
-                }
-
-            }
-            else
-            {
-                await new MessageDialog("There's no tracked issue right now.", "Nothing to abort").ShowAsync();
-            }
+            tracker.AskAbortTracking();
         }
 
         public DelegateCommand StopSaveCommand { get; }
-        public async void StopSaveTracking()
+        public  void StopSaveTracking()
         {
-            if (tracker.TrackingOn)
-            {
-                if (SettingsService.Instance.AskIfStop)
-                {
-                    MessageDialog dialog = new MessageDialog("Are you sure?", "Stop working on issue and save");
-                    dialog.Commands.Add(new UICommand("Yes", null));
-                    dialog.Commands.Add(new UICommand("No", null));
-                    dialog.DefaultCommandIndex = 0;
-                    dialog.CancelCommandIndex = 1;
-                    var cmd = await dialog.ShowAsync();
-                    if (cmd.Label == "Yes")
-                    {
-                        tracker.StopTracking();
-                    }
-                } else
-                {
-                    tracker.StopTracking();
-                }
-            }
-            else
-            {
-                await new MessageDialog("There's no tracked issue right now.", "Nothing to stop and save").ShowAsync();
-            }
+            tracker.AskStopTracking();
         }
 
         public string Description

@@ -8,22 +8,31 @@ using ProjectTimeAssistant.Models;
 using ProjectTimeAssistant.Services.DataService;
 using Windows.UI.Xaml;
 using Windows.UI.Popups;
+using ProjectTimeAssistant.Services.SettingsServices;
 
 namespace ProjectTimeAssistant.Services.Tracking
 {
     class Tracker
     {
 
-        DispatcherTimer stopWatch;
-        private static Tracker instance = null;
-        private IDataService dataService;
 
+        private static Tracker instance = null;
+        public delegate void ChangedEventHandler(TimeSpan t);
+        public delegate void NewTrackingStartedEventHandler();
+        public event ChangedEventHandler TimeChanged;
+        public event NewTrackingStartedEventHandler NewTracking;
+        private IDataService dataService;
+        private PopupService popupService;
+        DispatcherTimer stopWatch;
+
+        private WorkTime trackedTime;
         private Issue trackedIssue;
-        private Issue TrackedIssue {
+        private Issue TrackedIssue
+        {
             get { return trackedIssue; }
             set
             {
-                lastTracked = trackedIssue;
+                if (trackedIssue != null && trackedIssue.IssueID != -1) { lastTracked = trackedIssue; }
                 trackedIssue = value;
             }
         }
@@ -33,15 +42,6 @@ namespace ProjectTimeAssistant.Services.Tracking
         {
             get { return lastTracked; }
         }
-        private WorkTime trackedTime;
-
-        public delegate void ChangedEventHandler(TimeSpan t);
-        public delegate void NewTrackingStartedEventHandler();
-        public event ChangedEventHandler TimeChanged;
-        public event NewTrackingStartedEventHandler NewTracking;
-
-
-
 
         private TimeSpan time;
         public TimeSpan Time
@@ -53,106 +53,9 @@ namespace ProjectTimeAssistant.Services.Tracking
             }
         }
 
-
-        private Tracker()
-        {
-            trackedTime = new WorkTime();
-            TrackedIssue = new Issue();
-            time = new TimeSpan(0, 0, 0);
-            stopWatch = new DispatcherTimer();
-            stopWatch.Tick += DispatcherTimer_Tick;
-            stopWatch.Interval = new TimeSpan(0, 0, 0, 0, 5); //todo: (0, 0, 1)
-            dataService = DataSource.Instance;
-        }
-
-        public static Tracker Instance
-        {
-            get
-            {
-
-                if (instance == null)
-                {
-                    instance = new Tracker();
-                }
-
-                return instance;
-            }
-        }
-
-        private void DispatcherTimer_Tick(object sender, object e)
-        {
-            Time = time.Add(new TimeSpan(0, 0, 1));
-        }
-
-        private async Task<bool> SetIssue(Issue issue)
-        {
-            lastTracked = TrackedIssue;
-            if (!stopWatch.IsEnabled)
-            {
-                TrackedIssue = issue;
-                return true;
-            } else
-            {
-                MessageDialog dialog = getAskDialog();
-                var cmd = await dialog.ShowAsync();
-                if (cmd.Label == "Cancel")
-                {
-                    return false;
-                } else if (cmd.Label == "Yes")
-                {
-                    StopTracking();
-                    TrackedIssue = issue;
-                    return true;
-                }
-                else if (cmd.Label == "No")
-                {
-                    AbortTracking();
-                    TrackedIssue = issue;
-                    return true;
-                }
-                return false;
-            }
-        }
-
-        public Issue GetTrackedIssue()
-        {
-            return TrackedIssue;
-        }
-
-        public MessageDialog getAskDialog()
-        {
-            MessageDialog dialog = new MessageDialog("You are already tracking an issue. Do you want to save its time? Select cancel if you want to stay tracking.", "Already tracking an issue");
-            dialog.Commands.Add(new UICommand("Yes", null));
-            dialog.Commands.Add(new UICommand("No", null));
-            dialog.Commands.Add(new UICommand("Cancel", null));
-            dialog.DefaultCommandIndex = 0;
-            dialog.CancelCommandIndex = 2;
-            return dialog;
-        }
-
-        public async void AskStartTracking(Issue issue, string comment)
-        {
-            bool cond = await SetIssue(issue);
-            if (cond)
-            {
-                trackedTime = new WorkTime();
-                trackedTime.StartTime = DateTime.Now;
-                trackedTime.Comment = comment;
-                trackedTime.IssueID = issue.IssueID;
-                stopWatch.Start();
-                NewTracking();
-            }
-            
-        }
-
-        public bool TrackingOn
-        {
-            get { return stopWatch.IsEnabled; }
-        }
-
         public string Comment
         {
-            get {return trackedTime.Comment; }
+            get { return trackedTime.Comment; }
             set { trackedTime.Comment = value; }
         }
 
@@ -171,7 +74,7 @@ namespace ProjectTimeAssistant.Services.Tracking
             get { return TrackedIssue.Description; }
         }
 
-        public string IssueTracker 
+        public string IssueTracker
         {
             get { return TrackedIssue.Tracker; }
         }
@@ -183,39 +86,180 @@ namespace ProjectTimeAssistant.Services.Tracking
 
         public string IssueSubject
         {
-            get { return TrackedIssue.Subject;  }
+            get { return TrackedIssue.Subject; }
         }
 
-        public void StopTracking()
+        private bool paused = false;
+        public bool Paused { get { return paused; } }
+
+        private Tracker()
         {
-            if (stopWatch.IsEnabled)
+            SetStartValues();
+            stopWatch = new DispatcherTimer();
+            stopWatch.Tick += DispatcherTimer_Tick;
+            stopWatch.Interval = new TimeSpan(0, 0, 0, 0, 5); //todo: (0, 0, 1)
+            dataService = DataSource.Instance;
+            popupService = new PopupService();
+        }
+
+        public static Tracker Instance
+        {
+            get
             {
-                stopWatch.Stop();
-                trackedTime.IssueID = TrackedIssue.IssueID;
-                trackedTime.FinishTime = DateTime.Now;
 
-                //Todo: kerekítési beállítások
-                trackedTime.Hours = ((double)time.Hours) + ((double)time.Minutes / 60.0) + ((double) time.Seconds / 3600.0);
+                if (instance == null)
+                {
+                    instance = new Tracker();
+                }
 
-                //Database connetc requires to search this item
-                dataService.AddTimeEntry(trackedTime);
+                return instance;
+            }
+        }
 
-                time = new TimeSpan(0, 0, 0);
-                TrackedIssue = new Issue();
+        public async void AskStartTracking(Issue issue, string comment)
+        {
+            bool cond = await TrySetIssue(issue);
+            if (cond)
+            {
                 trackedTime = new WorkTime();
+                trackedTime.StartTime = DateTime.Now;
+                trackedTime.Comment = comment;
+                trackedTime.IssueID = issue.IssueID;
+                stopWatch.Start();
+                paused = false;
                 NewTracking();
             }
         }
 
-        public void AbortTracking()
+        private void SetStartValues()
+        {
+            time = new TimeSpan(0, 0, 0);
+            var issue = new Issue();
+            issue.IssueID = -1;
+            TrackedIssue = issue;
+            trackedTime = new WorkTime();
+        }
+
+
+        private void DispatcherTimer_Tick(object sender, object e)
+        {
+            Time = time.Add(new TimeSpan(0, 0, 1));
+        }
+
+        private async Task<bool> TrySetIssue(Issue issue)
+        {
+            if (!stopWatch.IsEnabled && paused == false)
+            {
+                TrackedIssue = issue;
+                return true;
+            } else
+            {
+                MessageDialog dialog = popupService.GetDefaultAskDialog("You are already tracking an issue. Do you want to save its time? Select cancel if you want to stay tracking.",
+                                                                        "Already tracking an issue", true);
+                var cmd = await dialog.ShowAsync();
+                if (cmd.Label == PopupService.CANCEL)
+                {
+                    return false;
+                } else if (cmd.Label == PopupService.YES)
+                {
+                    AskStopTracking();
+                    TrackedIssue = issue;
+                    return true;
+                }
+                else if (cmd.Label == PopupService.NO)
+                {
+                    AbortTracking();
+                    TrackedIssue = issue;
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        public Issue GetTrackedIssue()
+        {
+            return TrackedIssue;
+        }
+
+        public async void AskStopTracking()
+        {
+            if (stopWatch.IsEnabled || paused == true)
+            {
+                if (SettingsService.Instance.AskIfStop)
+                {
+                    MessageDialog dialog = popupService.GetDefaultAskDialog("Are you sure?", "Stop working on issue and save", false);
+                    var cmd = await dialog.ShowAsync();
+                    if (cmd.Label == "Yes")
+                    {
+                        StopTracking();
+                    }
+                }else { StopTracking(); }
+            } else
+            {
+                await popupService.GetDefaultNotification("There's no tracked issue right now.", "Nothing to stop and save").ShowAsync();
+            }
+        }
+
+        private void StopTracking()
+        {
+            stopWatch.Stop();
+            paused = false;
+            trackedTime.IssueID = TrackedIssue.IssueID;
+            trackedTime.FinishTime = DateTime.Now;
+
+            //Todo: kerekítési beállítások
+            trackedTime.Hours = ((double)time.Hours) + ((double)time.Minutes / 60.0) + ((double)time.Seconds / 3600.0);
+
+            //Database connetc requires to search this item
+            dataService.AddTimeEntry(trackedTime);
+
+            SetStartValues();
+            NewTracking();
+        }
+
+        public async void AskAbortTracking()
+        {
+            if (stopWatch.IsEnabled || paused == true)
+            {
+                if (SettingsService.Instance.AskIfStop)
+                {
+                    MessageDialog dialog = popupService.GetDefaultAskDialog("Are you sure? Aborting will reset all worktime.", "Abort Tracking", false);
+                    var cmd = await dialog.ShowAsync();
+                    if (cmd.Label == "Yes")
+                    {
+                        AbortTracking();
+                    }
+                }else { AbortTracking(); }
+            }
+            else
+            {
+                await popupService.GetDefaultNotification("There's no tracked issue right now.", "Nothing to abort").ShowAsync();
+            }
+        }
+
+        private void AbortTracking()
+        {
+            stopWatch.Stop();
+            paused = false;
+            SetStartValues();
+            NewTracking();
+        }
+
+        public void PauseTracking()
         {
             if (stopWatch.IsEnabled)
             {
                 stopWatch.Stop();
-                time = new TimeSpan(0, 0, 0);
-                TrackedIssue = new Issue();
-                trackedTime = new WorkTime();
-                NewTracking();
+                paused = true;
+            }
+        }
+
+        public void RestartTracking()
+        {
+            if (!stopWatch.IsEnabled && paused == true)
+            {
+                stopWatch.Start();
+                paused = false;
             }
         }
 
