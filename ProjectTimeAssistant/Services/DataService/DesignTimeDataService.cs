@@ -15,7 +15,7 @@ namespace ProjectTimeAssistant.Services.DataService
             throw new NotImplementedException();
         }
 
-        public Issue getActuallyTracked()
+        public Issue GetActuallyTracked()
         {
             Models.Issue tmp = new Models.Issue();
             tmp.IssueID = 1;
@@ -30,7 +30,7 @@ namespace ProjectTimeAssistant.Services.DataService
             return tmp;
         }
 
-        public double getAllWorkingTime(Issue issue)
+        public double GetAllWorkingTime(Issue issue)
         {
             return 10.4;
         }
@@ -50,7 +50,7 @@ namespace ProjectTimeAssistant.Services.DataService
             return tmp;
         }
 
-        public ObservableCollection<Issue> getIssues()
+        public ObservableCollection<Issue> GetIssues()
         {
             ObservableCollection<Models.Issue> list = new ObservableCollection<Models.Issue>();
 
@@ -71,7 +71,7 @@ namespace ProjectTimeAssistant.Services.DataService
 
         }
 
-        public ObservableCollection<WorkTime> getWorkTimes()
+        public ObservableCollection<WorkTime> GetWorkTimes()
         {
             ObservableCollection<Models.WorkTime> list = new ObservableCollection<Models.WorkTime>();
 
@@ -85,6 +85,11 @@ namespace ProjectTimeAssistant.Services.DataService
             list.Add(tmp);
 
             return list;
+        }
+
+        public void SetFavourite(int id, bool isFavourite)
+        {
+            throw new NotImplementedException();
         }
     }
 }

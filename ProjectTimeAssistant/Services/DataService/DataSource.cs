@@ -141,7 +141,7 @@ namespace ProjectTimeAssistant.Services.DataService
             db.SaveChanges();
         }
 
-        public ObservableCollection<Issue> getIssues()
+        public ObservableCollection<Issue> GetIssues()
         {
             using (var db = new DataContext())
             {
@@ -151,7 +151,7 @@ namespace ProjectTimeAssistant.Services.DataService
             
         }
 
-        public ObservableCollection<WorkTime> getWorkTimes()
+        public ObservableCollection<WorkTime> GetWorkTimes()
         {
             using (var db = new DataContext())
             {
@@ -179,12 +179,12 @@ namespace ProjectTimeAssistant.Services.DataService
             throw new NotImplementedException();
         }
 
-        public Issue getActuallyTracked()
+        public Issue GetActuallyTracked()
         {
             throw new NotImplementedException();
         }
 
-        public double getAllWorkingTime(Issue issue)
+        public double GetAllWorkingTime(Issue issue)
         {
             using (var db = new DataContext())
             {
@@ -200,5 +200,15 @@ namespace ProjectTimeAssistant.Services.DataService
             }
         }
 
+        public void SetFavourite(int id, bool isFavourite)
+        {
+            using (var db = new DataContext())
+            {
+                Issue issue = db.Issues.Where(i => i.IssueID == id).Include(i => i.Project).Single();
+                issue.IsFavourite = isFavourite;
+                db.SaveChanges();
+            }
+
+        }
     }
 }

@@ -74,7 +74,7 @@ namespace ProjectTimeAssistant.ViewModels
             {
                 if(tracker.GetTrackedIssue() != null)
                 {
-                    return DataSource.Instance.getAllWorkingTime(tracker.GetTrackedIssue());
+                    return DataSource.Instance.GetAllWorkingTime(tracker.GetTrackedIssue());
                 } else { return 0; }   
             }          
         }

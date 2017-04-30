@@ -40,7 +40,7 @@ namespace ProjectTimeAssistant.ViewModels
 
         public void Refresh()
         {
-            List = DataSource.Instance.getIssues();
+            List = DataSource.Instance.GetIssues();
         }
 
         private int orderCatName;

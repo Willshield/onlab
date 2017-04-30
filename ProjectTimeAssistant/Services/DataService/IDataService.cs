@@ -10,12 +10,13 @@ namespace ProjectTimeAssistant.Services.DataService
 {
     interface IDataService
     {
-        ObservableCollection<Issue> getIssues();
-        ObservableCollection<WorkTime> getWorkTimes();
-        Issue getActuallyTracked();
+        ObservableCollection<Issue> GetIssues();
+        ObservableCollection<WorkTime> GetWorkTimes();
+        Issue GetActuallyTracked();
         void AddTimeEntry(WorkTime workTime);
-        double getAllWorkingTime(Issue issue);
+        double GetAllWorkingTime(Issue issue);
         Issue GetIssueById(int id);
+        void SetFavourite(int id, bool isFavourite);
     }
 
 }

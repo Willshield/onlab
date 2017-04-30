@@ -67,17 +67,28 @@ namespace ProjectTimeAssistant.Models
         {
             get
             {
-                return DataSource.Instance.getAllWorkingTime(this);
+                return DataSource.Instance.GetAllWorkingTime(this);
             }
         }
 
         [NotMapped]
-        public Template10.Mvvm.AwaitableDelegateCommand TrackingCommand { get { return new Template10.Mvvm.AwaitableDelegateCommand(StartTracking); } }
+        public AwaitableDelegateCommand TrackingCommand { get { return new AwaitableDelegateCommand(StartTracking); } }
         public async Task StartTracking(AwaitableDelegateCommandParameter arg)
         {
             await Services.Tracking.Tracker.Instance.AskStartTracking(this, "");
         }
-
+        [NotMapped]
+        public DelegateCommand InvertFavouriteCommand { get { return new DelegateCommand(InvertFavourite); } }
+        public void InvertFavourite()
+        {
+            DataSource.Instance.SetFavourite(this.IssueID, !this.IsFavourite);
+        }
+        [NotMapped]
+        public bool FavouriteSetter
+        {
+            get { return this.IsFavourite; }
+            set { DataSource.Instance.SetFavourite(this.IssueID, value); }
+        }
 
     }
 }

@@ -101,7 +101,9 @@
                                 <ScrollViewer VerticalScrollMode="Enabled" HorizontalScrollMode="Disabled" Height="100" Grid.Row="4">
                                     <TextBlock Text="{Binding Description}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="12" TextWrapping="Wrap" />
                                 </ScrollViewer>
-                                <Button Width="150" Height="32" Padding="0"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="5">
+                                <ToggleSwitch IsOn="{Binding FavouriteSetter, Mode=TwoWay}" Header="Favourite" Padding="0"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="5" />
+
+                                <!--<Button Width="150" Height="32" Padding="0"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="5">
                                     <Grid Width="150" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="5">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="32" />
@@ -110,7 +112,7 @@
                                         <SymbolIcon Grid.Column="0" Symbol="Favorite" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" />
                                         <TextBlock Grid.Column="1" Text="Set as favourite" FontSize="16" VerticalAlignment="Center" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" />
                                     </Grid>
-                                </Button>
+                                </Button>-->
                                 <Button Content="Start tracking" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="5" Command="{Binding TrackingCommand}"/>
                             </Grid>
                         </DataTemplate>

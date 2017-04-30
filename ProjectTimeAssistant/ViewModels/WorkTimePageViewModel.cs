@@ -108,7 +108,7 @@ namespace ProjectTimeAssistant.ViewModels
 
         public void Refresh()
         {
-            List = DataService.getWorkTimes();
+            List = DataService.GetWorkTimes();
         }
     }
 }
