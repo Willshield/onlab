@@ -46,4 +46,14 @@ namespace ProjectTimeAssistant.Services.Network
             public string name { get; set; }
         }
 
+    public class Time_Entry
+    {
+        public string key { get; set; }
+        public int issue_id { get; set; }
+        public DateTime spent_on { get; set; }
+        public float hours { get; set; }
+        public int activity_id { get; set; }
+        public string comments { get; set; }
+    }
+
 }

@@ -51,11 +51,18 @@ namespace ProjectTimeAssistant.ViewModels
         public DelegateCommand StartTrackingCommand { get; }
         public async void StartTracking()
         {
-            if (SelectedIssue == null)
-                return;
+            //if (SelectedIssue == null)
+            //    return;
 
-            await DataService.GetIssueById(SelectedIssue.IssueID).StartTracking(null);
-            NavigationService.Navigate(typeof(Views.ActuallyTrackingPage));
+            //await DataService.GetIssueById(SelectedIssue.IssueID).StartTracking(null);
+            //NavigationService.Navigate(typeof(Views.ActuallyTrackingPage));
+
+            RedmineDataConverter rdc = new RedmineDataConverter();
+            WorkTime wt = new WorkTime();
+            wt.IssueID = 1;
+            wt.Hours = 1;
+            wt.Comment = "posttest";
+            await rdc.PostTimeEntryAsync(wt);
         }
         private Issue selectedIssue;
         public Issue SelectedIssue {

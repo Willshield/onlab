@@ -33,9 +33,9 @@
 
 
         <!--header-->
-        <usercontrols:TitledPageHeader Grid.Row="0" Label="Home" />
-        <TextBlock Text="Favourite issues" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
-                               FontSize="20" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" FontStyle="Italic" />
+        <usercontrols:TitledPageHeader Grid.Row="0" Label="Favourite issues" />
+        <!--<TextBlock Text="Favourite issues" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="20" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" FontStyle="Italic" />-->
         <!--table header-->
         <Grid  Margin="0" Grid.Row="2" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" HorizontalAlignment="Left">
             <Grid.ColumnDefinitions>

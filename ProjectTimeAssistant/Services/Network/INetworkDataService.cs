@@ -8,8 +8,9 @@ namespace ProjectTimeAssistant.Services.Network
 {
     interface INetworkDataService
     {
-       Task<IssueContainer> GetIssuesAsync();
-       Task<ProjectContainer> GetProjectsAsync();
-       Task<TimeEntriesContainer> GetTimeEntriesAsync();
+        Task<IssueContainer> GetIssuesAsync();
+        Task<ProjectContainer> GetProjectsAsync();
+        Task<TimeEntriesContainer> GetTimeEntriesAsync();
+        Task PostTimeEntry(Time_Entry t);
     }
 }

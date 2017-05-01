@@ -28,7 +28,8 @@ namespace ProjectTimeAssistant.Services.Network
             using (var client = new HttpClient())
             {
                 var json = JsonConvert.SerializeObject(t);
-                await client.PostAsync(uri, new StringContent(json, new UTF8Encoding(), "application/json"));
+                HttpResponseMessage rpmsg = await client.PostAsync(uri, new StringContent(json, new UTF8Encoding(), "application/json"));
+
             }
         }
 
@@ -45,6 +46,12 @@ namespace ProjectTimeAssistant.Services.Network
         public async Task<TimeEntriesContainer> GetTimeEntriesAsync()
         {
             return await GetAsync<TimeEntriesContainer>(new Uri(serverUrl, $"time_entries.json"));
+        }
+
+        public async Task PostTimeEntry(Time_Entry t)
+        {
+            t.key = "4f56fb8188c5f48811efe9a47b7ef50ad3443318";
+            await PostTAsync<Time_Entry>(new Uri(serverUrl, $"time_entries.json"), t);
         }
     }
 }
