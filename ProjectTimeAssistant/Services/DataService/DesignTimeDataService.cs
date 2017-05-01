@@ -35,6 +35,11 @@ namespace ProjectTimeAssistant.Services.DataService
             return 10.4;
         }
 
+        public ObservableCollection<Issue> GetFavouriteIssues()
+        {
+            return GetIssues();
+        }
+
         public Issue GetIssueById(int id)
         {
             Models.Issue tmp = new Models.Issue();

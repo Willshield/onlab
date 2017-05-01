@@ -1,30 +1,34 @@
-using System;
-using ProjectTimeAssistant.ViewModels;
+ï»¿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using System.Collections.ObjectModel;
-using ProjectTimeAssistant.Models;
-using System.Collections.Generic;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
 
-namespace ProjectTimeAssistant.Views
+// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
+
+namespace ProjectTimeAssistant.Views.UserControls
 {
-    public sealed partial class MainPage : Page
+    public sealed partial class TrackList : UserControl
     {
-
-        public MainPage()
+        public TrackList()
         {
-            InitializeComponent();
-            NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
-
+            this.InitializeComponent();
         }
 
         private bool OrderbyDesc = false;
         private void OrderData(object sender, TappedRoutedEventArgs e)
         {
             TextBlock ClickedBox = sender as TextBlock;
-            SetNormalOpícity();
+            SetNormalOpÃ­city();
             ClickedBox.Opacity = 0.6;
             switch (ClickedBox.Name)
             {
@@ -34,13 +38,13 @@ namespace ProjectTimeAssistant.Views
                 case "Project":
                     ViewModel.OrderCatName = ViewModels.WorkTimePageViewModel.ProjectNameKey;
                     break;
-                case "Updated":
+                case "StartTime":
                     ViewModel.OrderCatName = ViewModels.WorkTimePageViewModel.StartTimeKey;
                     break;
                 case "Hours":
                     ViewModel.OrderCatName = ViewModels.WorkTimePageViewModel.HoursKey;
                     break;
-                case "Description":
+                case "Comment":
                     ViewModel.OrderCatName = ViewModels.WorkTimePageViewModel.CommentKey;
                     break;
             }
@@ -48,14 +52,13 @@ namespace ProjectTimeAssistant.Views
             OrderbyDesc = !OrderbyDesc;
         }
 
-        private void SetNormalOpícity()
+        private void SetNormalOpÃ­city()
         {
             Subject.Opacity = 1;
             Project.Opacity = 1;
-            Updated.Opacity = 1;
+            StartTime.Opacity = 1;
             Hours.Opacity = 1;
-            Description.Opacity = 1;
+            Comment.Opacity = 1;
         }
-
     }
 }

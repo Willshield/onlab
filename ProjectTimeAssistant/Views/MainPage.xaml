@@ -11,26 +11,87 @@
       xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
       xmlns:usercontrols="using:ProjectTimeAssistant.Views.UserControls"
       xmlns:models="using:ProjectTimeAssistant.Models"
+      xmlns:conv="using:ProjectTimeAssistant.DataValueConverters" 
       mc:Ignorable="d">
     
     <Page.DataContext>
         <vm:MainPageViewModel x:Name="ViewModel" />
     </Page.DataContext>
-
-    <Grid Margin="75,5,10,5">
+    <Page.Resources>
+        <conv:DateFormatConverter x:Name="DateFormatConverter" x:Key="DateFormatConverter"/>
+        <conv:DoubleFormatConverter x:Name="DoubleFormatConverter" x:Key="DoubleFormatConverter"/>
+    </Page.Resources>
+    
+    <Grid Margin="75,5,10,5" Canvas.ZIndex="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition MaxHeight="650"/>
+            <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
 
 
         <!--header-->
         <usercontrols:TitledPageHeader Grid.Row="0" Label="Home" />
+        <TextBlock Text="Favourite issues" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="20" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" FontStyle="Italic" />
+        <!--table header-->
+        <Grid  Margin="0" Grid.Row="2" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" HorizontalAlignment="Left">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="210"/>
+                <ColumnDefinition Width="145"/>
+                <ColumnDefinition Width="145"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="220"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Name="Subject" Text="Subject" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="20" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Tapped="OrderData" />
+            <TextBlock Name="Project" Text="Project" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="20" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Tapped="OrderData"/>
+            <TextBlock Name="Updated" Text="Updated" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="20" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Tapped="OrderData"/>
+            <TextBlock Name="Hours" Text="Working Hours" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="20" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" Tapped="OrderData"/>
+            <TextBlock Name="Description" Text="Description" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                               FontSize="20" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Tapped="OrderData"/>
+        </Grid>
+
+        <ListView Width="900" MaxHeight="550" SelectionMode="Single" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding List}" Grid.Row="3" Margin="0" SelectedItem="{Binding SelectedIssue, Mode=TwoWay}">
+
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:Issue" >
+                    <Grid Margin="2" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="210"/>
+                            <ColumnDefinition Width="145"/>
+                            <ColumnDefinition Width="145"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{x:Bind Subject}"     Foreground="{ThemeResource ApplicationForegroundThemeBrush}" VerticalAlignment="Center" FontSize="14" Grid.Column="0"/>
+                        <TextBlock Text="{x:Bind Project.Name}"     Foreground="{ThemeResource ApplicationForegroundThemeBrush}"           VerticalAlignment="Center" FontSize="14" Grid.Column="1"/>
+                        <TextBlock Text="{x:Bind Updated, Converter={StaticResource DateFormatConverter},ConverterParameter=\{0:yyyy/MM/dd H:mm\} }"   Foreground="{ThemeResource ApplicationForegroundThemeBrush}"     VerticalAlignment="Center" FontSize="14" Grid.Column="2"/>
+                        <TextBlock Text="{x:Bind AllTrackedTime, Converter={StaticResource DoubleFormatConverter}}"       Foreground="{ThemeResource ApplicationForegroundThemeBrush}" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="14" Grid.Column="3" Padding="20,0" />
+                        <TextBlock Text="{x:Bind Description}"     Foreground="{ThemeResource ApplicationForegroundThemeBrush}"     VerticalAlignment="Center"  FontSize="14" Grid.Column="4" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Height" Value="30" />
+                    <Setter Property="MinHeight" Value="30"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
 
         <!--footer-->
-        <usercontrols:ActuallyTrackingUserControl HorizontalAlignment="Center"  VerticalAlignment="Center"  Grid.Row="1"/>
+        <Button Content="Start tracking" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="4" Command="{Binding StartTrackingCommand}"/>
+        <usercontrols:ActuallyTrackingUserControl HorizontalAlignment="Center"  VerticalAlignment="Center"  Grid.Row="4"/>
+
     </Grid>
-    
+
 
 </Page>
 

@@ -5,9 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
-
 namespace ProjectTimeAssistant.Views.UserControls
 {
     public sealed partial class TitledPageHeader : UserControl

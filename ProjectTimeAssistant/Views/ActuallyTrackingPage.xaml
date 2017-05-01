@@ -35,7 +35,7 @@
                 <ColumnDefinition Width="400" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
@@ -43,9 +43,10 @@
                 <RowDefinition Height="150"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-                <TextBlock Text="Issue:" Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" Opacity=".6" MaxLines="1" VerticalAlignment="Center"/>
-                <TextBlock Name="lbSubject" Text="{Binding Subject}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="24" VerticalAlignment="Center" Margin="10,0,0,0" />
+                <TextBlock Text="Issue:" Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" Opacity=".6" MaxLines="1" VerticalAlignment="Center" />
+                <TextBlock Name="lbSubject" Text="{Binding Subject}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" VerticalAlignment="Center"  MaxLines="3" FontSize="24" Margin="10,0,0,0" MaxWidth="350" TextWrapping="WrapWholeWords"/>
             </StackPanel>
+            
             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
                 <TextBlock Text="Project:" Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" Opacity=".6" MaxLines="1" VerticalAlignment="Center"/>
                 <TextBlock Text="{Binding ProjectName}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="15" VerticalAlignment="Center"  Margin="10,0,0,0"/>

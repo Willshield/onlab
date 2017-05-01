@@ -5,7 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
-using ProjectTimeAssistant.Services.Network;
+using ProjectTimeAssistant.Models;
+using System.Collections.ObjectModel;
+using ProjectTimeAssistant.Services.DataService;
 
 namespace ProjectTimeAssistant.ViewModels
 {
@@ -13,30 +15,112 @@ namespace ProjectTimeAssistant.ViewModels
     {
         private string testText;
 
-        public string TestText
+        IDataService DataService;
+        private ObservableCollection<Issue> list;
+        public ObservableCollection<Issue> List
         {
-            get { return testText; }
-            set { Set(ref testText, value); }
+            get { return list; }
+            set { Set(ref list, value); }
         }
 
 
         public MainPageViewModel()
         {
-            //if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
-            //{ 
-            //}
-            getData();
-
+            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            {
+                DataService = new DesignTimeDataService();
+                getData();
+            }
+            else
+            {
+                DataService = DataSource.Instance;
+                getData();
+                StartTrackingCommand = new DelegateCommand(StartTracking, CanStartTracking);
+            }
+        }
+        public bool CanStartTracking()
+        {
+            return !(SelectedIssue == null);
         }
 
         private void getData()
         {
-            var _settings = Services.SettingsServices.SettingsService.Instance;
-            TestText = _settings.Rounding.ToString();
+            List = DataService.GetFavouriteIssues();
         }
 
+        public DelegateCommand StartTrackingCommand { get; }
+        public async void StartTracking()
+        {
+            if (SelectedIssue == null)
+                return;
 
+            await DataService.GetIssueById(SelectedIssue.IssueID).StartTracking(null);
+            NavigationService.Navigate(typeof(Views.ActuallyTrackingPage));
+        }
+        private Issue selectedIssue;
+        public Issue SelectedIssue {
+            get { return selectedIssue; }
+            set
+            {
+                Set(ref selectedIssue, value);
+                StartTrackingCommand.RaiseCanExecuteChanged();
+            }
+        }
 
+        private int orderCatName;
+        public int OrderCatName
+        {
+            get { return orderCatName; }
+            set { orderCatName = value; }
+        }
+        public void OrderCats(bool byDesc)
+        {
+            switch (OrderCatName)
+            {
+                case 0:
+                    if (byDesc)
+                    { List = new ObservableCollection<Issue>(List.OrderByDescending(i => i.Subject)); }
+                    else
+                    { List = new ObservableCollection<Issue>(List.OrderBy(i => i.Subject)); }
+                    break;
+                case 1:
+                    if (byDesc)
+                    { List = new ObservableCollection<Issue>(List.OrderByDescending(i => i.Project.Name)); }
+                    else
+                    { List = new ObservableCollection<Issue>(List.OrderBy(i => i.Project.Name)); }
+                    break;
+                case 2:
+                    if (byDesc)
+                    { List = new ObservableCollection<Issue>(List.OrderByDescending(i => i.Updated)); }
+                    else
+                    { List = new ObservableCollection<Issue>(List.OrderBy(i => i.Updated)); }
+                    break;
+                case 3:
+                    if (byDesc)
+                    { List = new ObservableCollection<Issue>(List.OrderByDescending(i => i.AllTrackedTime)); }
+                    else
+                    { List = new ObservableCollection<Issue>(List.OrderBy(i => i.AllTrackedTime)); }
+                    break;
+                case 4:
+                    if (byDesc)
+                    { List = new ObservableCollection<Issue>(List.OrderByDescending(i => i.Description)); }
+                    else
+                    { List = new ObservableCollection<Issue>(List.OrderBy(i => i.Description)); }
+                    break;
+            }
+        }
+
+        public void Refresh()
+        {
+            List = DataService.GetFavouriteIssues();
+        }
+
+        public override Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        {
+            Refresh();
+            return base.OnNavigatedToAsync(parameter, mode, state);
+
+        }
 
         //Navigation services
         //string _Value = "Gas";

@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ProjectTimeAssistant.Models;
-using ProjectTimeAssistant.Services.DataBase;
+﻿using ProjectTimeAssistant.Models;
 using ProjectTimeAssistant.Services.DataService;
 using System;
 using System.Collections.Generic;
@@ -12,9 +10,8 @@ using Template10.Mvvm;
 
 namespace ProjectTimeAssistant.ViewModels
 {
-    public class WorkTimePageViewModel : ViewModelBase
+    class TrackListViewModel : ViewModelBase
     {
-
         public static readonly int SubjectKey = 0;
         public static readonly int ProjectNameKey = 1;
         public static readonly int StartTimeKey = 2;
@@ -31,7 +28,7 @@ namespace ProjectTimeAssistant.ViewModels
 
         IDataService DataService;
 
-        public WorkTimePageViewModel()
+        public TrackListViewModel()
         {
             RefreshCommand = new DelegateCommand(Refresh);
             StartTrackingCommand = new DelegateCommand(StartTracking);
@@ -39,7 +36,8 @@ namespace ProjectTimeAssistant.ViewModels
             {
                 DataService = new DesignTimeDataService();
                 Refresh();
-            } else
+            }
+            else
             {
                 DataService = DataSource.Instance;
                 Refresh();
@@ -112,5 +110,6 @@ namespace ProjectTimeAssistant.ViewModels
 
 
         }
+
     }
 }

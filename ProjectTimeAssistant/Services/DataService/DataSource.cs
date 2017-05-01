@@ -210,5 +210,13 @@ namespace ProjectTimeAssistant.Services.DataService
             }
 
         }
+
+        public ObservableCollection<Issue> GetFavouriteIssues()
+        {
+            using (var db = new DataContext())
+            {
+                return new ObservableCollection<Issue>(db.Issues.Where(i => i.IsFavourite).Include(i => i.Project).ToList());
+            }
+        }
     }
 }

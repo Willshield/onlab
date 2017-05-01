@@ -6,12 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:ProjectTimeAssistant.ViewModels"
-    mc:Ignorable="d" Height="100" Width="700">
+    mc:Ignorable="d" Height="100" Width="1000">
 
     <UserControl.DataContext>
         <vm:ActuallyTrackingUserControlViewModel x:Name="ViewModel" />
     </UserControl.DataContext>
-    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" MinWidth="600" MaxWidth="750" Height="50">
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" Width="Auto" Height="50">
         <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}">
             <TextBlock Text="Actually tracking:" Margin="15,0" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" />
             <TextBlock Text="{Binding Subject}" Margin="15,0"  Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="26" VerticalAlignment="Center" HorizontalAlignment="Center"/>
