@@ -37,7 +37,7 @@
         <!--<TextBlock Text="Favourite issues" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
                                FontSize="20" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" FontStyle="Italic" />-->
         <!--table header-->
-        <Grid  Margin="0" Grid.Row="2" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" HorizontalAlignment="Left">
+        <Grid  Margin="0" Grid.Row="2" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30"/>
                 <ColumnDefinition Width="210"/>
@@ -58,7 +58,7 @@
                                FontSize="20" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Tapped="OrderData"/>
         </Grid>
 
-        <ListView Width="900" MaxHeight="550" SelectionMode="Single" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding List}" Grid.Row="3" Margin="0" SelectedItem="{Binding SelectedIssue, Mode=TwoWay}">
+        <ListView Width="900" MaxHeight="550" SelectionMode="Single" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding List}" Grid.Row="3" Margin="0" SelectedItem="{Binding SelectedIssue, Mode=TwoWay}" HorizontalAlignment="Center">
 
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:Issue" >

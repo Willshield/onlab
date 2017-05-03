@@ -11,6 +11,6 @@ namespace ProjectTimeAssistant.Services.Network
         Task<IssueContainer> GetIssuesAsync();
         Task<ProjectContainer> GetProjectsAsync();
         Task<TimeEntriesContainer> GetTimeEntriesAsync();
-        Task PostTimeEntry(Time_Entry t);
+        Task PostTimeEntry(Post_Time_Entry t);
     }
 }

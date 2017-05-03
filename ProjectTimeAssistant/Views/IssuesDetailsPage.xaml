@@ -34,7 +34,7 @@
 
 
             <!--table header-->
-            <Grid Margin="0" Grid.Row="1" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" HorizontalAlignment="Left">
+            <Grid Margin="0" Grid.Row="1" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" HorizontalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30"/>
                     <ColumnDefinition Width="195"/>
@@ -55,7 +55,7 @@
             </Grid>
 
             <!--masterdetails-->
-            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="2" >
+            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="2" HorizontalAlignment="Center">
                 <controls:MasterDetailsView ItemsSource="{Binding List}" SelectedItem="{Binding Selected, Mode=TwoWay}" 
                                     NoSelectionContent="Select an item to view"
                                     Foreground="Black" MasterPaneWidth="500">

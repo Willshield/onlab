@@ -18,17 +18,32 @@ namespace ProjectTimeAssistant.Services.Network
             {
                 var response = await client.GetAsync(uri);
                 var json = await response.Content.ReadAsStringAsync();
-                T result = JsonConvert.DeserializeObject<T>(json);
-                return result;
+                if (response.IsSuccessStatusCode)
+                {
+                    T result = JsonConvert.DeserializeObject<T>(json);
+                    return result;
+                } else
+                {
+                    PopupService p = new PopupService();
+                    p.GetDefaultNotification("Loading data failed. Try again later.", "Network error");
+                }
+
+                return default(T);
             }
         }
 
+        HttpResponseMessage rpmsg;
         private async Task PostTAsync<T>(Uri uri, T t)
         {
             using (var client = new HttpClient())
             {
                 var json = JsonConvert.SerializeObject(t);
-                HttpResponseMessage rpmsg = await client.PostAsync(uri, new StringContent(json, new UTF8Encoding(), "application/json"));
+                rpmsg = await client.PostAsync(uri, new StringContent(json, new UTF8Encoding(), "application/json"));
+                if(rpmsg.StatusCode != System.Net.HttpStatusCode.Created)
+                {
+                    PopupService p = new PopupService();
+                    p.GetDefaultNotification("Loading data failed. Try again later.", "Network error");
+                }
 
             }
         }
@@ -48,14 +63,24 @@ namespace ProjectTimeAssistant.Services.Network
             return await GetAsync<TimeEntriesContainer>(new Uri(serverUrl, $"time_entries.json"));
         }
 
-        public async Task PostTimeEntry(Time_Entry t)
+        public async Task PostTimeEntry(Post_Time_Entry t)
         {
             t.key = "4f56fb8188c5f48811efe9a47b7ef50ad3443318";
-            await PostTAsync<Time_Entry>(new Uri(serverUrl, $"time_entries.json"), t);
+            await PostTAsync<Post_Time_Entry>(new Uri(serverUrl, $"time_entries.json"), t);
         }
     }
 }
+
 /*
+ * 
+ {"key":"4f56fb8188c5f48811efe9a47b7ef50ad3443318",
+ "time_entry" : 
+  { "issue_id":1,
+    "hours":1.0,
+    "activity_id":1,
+    "comments":"posttest"}
+}
+    
 {"issues":
 [{"id":11,"project":{"id":5,"name":"Modellez\u00e9s"},"tracker":{"id":4,"name":"Tervez\u00e9s"},"status":{"id":1,"name":"\u00daj"},"priority":{"id":3,"name":"Magas"},"author":{"id":2,"name":"Redmine Admin"},"subject":"Oszt\u00e1lymodell kidolgoz\u00e1sa","description":"","start_date":"2017-02-21","done_ratio":30,"created_on":"2017-02-21T09:59:06Z","updated_on":"2017-02-21T15:20:13Z"},
  {"id":10,"project":{"id":5,"name":"Modellez\u00e9s"},"tracker":{"id":4,"name":"Tervez\u00e9s"},"status":{"id":1,"name":"\u00daj"},"priority":{"id":3,"name":"Magas"},"author":{"id":2,"name":"Redmine Admin"},"subject":"Adatmodell kidolgoz\u00e1sa","description":"","start_date":"2017-02-21","done_ratio":0,"created_on":"2017-02-21T09:58:57Z","updated_on":"2017-02-21T09:59:43Z"},

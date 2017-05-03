@@ -82,13 +82,14 @@ namespace ProjectTimeAssistant.Services.DataService
 
         public async Task PostTimeEntryAsync(WorkTime wt)
         {
-            Time_Entry t = new Time_Entry();
-            t.issue_id = wt.IssueID;
-            t.hours = (float) wt.Hours;
-            t.comments = wt.Comment;
-            t.activity_id = 1;
-            t.spent_on = DateTime.Now;
-            await networkService.PostTimeEntry(t);
+            Post_Time_Entry pt = new Post_Time_Entry();
+            pt.time_entry = new Time_Entry();
+            pt.time_entry.issue_id = wt.IssueID;
+            pt.time_entry.hours = (float)wt.Hours;
+            pt.time_entry.comments = wt.Comment;
+            pt.time_entry.activity_id = 1;
+
+            await networkService.PostTimeEntry(pt);
         }
 
     }

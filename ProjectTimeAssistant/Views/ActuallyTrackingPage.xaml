@@ -29,7 +29,7 @@
         <!--header-->
         <usercontrols:TitledPageHeader Grid.Row="0" Label="Actually Tracked" />
 
-        <Grid Margin="30" Padding="0" Grid.Row="1" >
+        <Grid Margin="30" Padding="0" Grid.Row="1" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="400" />
                 <ColumnDefinition Width="400" />
