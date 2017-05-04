@@ -18,15 +18,15 @@
     </Page.DataContext>
     <Page.Resources>
         <conv:DateFormatConverter x:Name="DateFormatConverter" x:Key="DateFormatConverter"/>
-        <conv:DoubleFormatConverter x:Name="DoubleFormatConverter" x:Key="DoubleFormatConverter"/>
+        <conv:DoubleOrNoneFormatConverter x:Name="DoubleFormatConverter" x:Key="DoubleFormatConverter"/>
     </Page.Resources>
 
     <Grid Margin="75,5,10,5" Canvas.ZIndex="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition MaxHeight="650"/>
+            <RowDefinition MaxHeight="620"/>
             <!--<RowDefinition Height="825"/>-->
             <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
@@ -35,7 +35,7 @@
         <!--header-->
         <usercontrols:TitledPageHeader Grid.Row="0" Label="Tracked worktimes" />
 
-        <ComboBox x:Name="GroupByCombo" Grid.Row="1" Header="Group by:" Width="296" Height="70" SelectedIndex="{Binding SelectedGroupBy, Mode=TwoWay}" ItemsSource="{x:Bind OrderingCats}" Margin="20,0"/>
+        <ComboBox x:Name="GroupByCombo" Grid.Row="1" Header="Group by:" Width="296" Height="70" SelectedIndex="{Binding SelectedGroupBy, Mode=TwoWay}" ItemsSource="{x:Bind OrderingCats}" Margin="20,0" VerticalAlignment="Top"/>
         <!--<ScrollViewer VerticalScrollMode="Auto" Height="600" Grid.Row="1">
             <usercontrols:TrackList />
         </ScrollViewer>-->

@@ -155,7 +155,7 @@ namespace ProjectTimeAssistant.Services.DataService
         {
             using (var db = new DataContext())
             {
-                var wts = new ObservableCollection<WorkTime>(db.WorkTimes.Include(wt => wt.Issue).Include(i => i.Issue.Project).ToList());
+                var wts = new ObservableCollection<WorkTime>(db.WorkTimes.Include(wt => wt.Issue).Include(i => i.Issue.Project).OrderByDescending(i => i.StartTime).ToList());
                 return wts;
             }
 

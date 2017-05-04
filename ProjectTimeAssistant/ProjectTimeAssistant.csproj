@@ -99,6 +99,7 @@
     </Compile>
     <Compile Include="DataValueConverters\DateFormatConverter.cs" />
     <Compile Include="DataValueConverters\DoubleFormatConverter.cs" />
+    <Compile Include="DataValueConverters\DoubleOrNoneFormatConverter.cs" />
     <Compile Include="Migrations\20170419013740_MyThirdMigration.cs" />
     <Compile Include="Migrations\20170419013740_MyThirdMigration.Designer.cs">
       <DependentUpon>20170419013740_MyThirdMigration.cs</DependentUpon>
