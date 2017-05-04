@@ -62,6 +62,19 @@
                                Text="Issue details" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
+
+            <!--  Sync button  -->
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:SyncPage">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48"
+                                Height="48"
+                                Symbol="Sync" />
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="Sync Data" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
         </Controls:HamburgerMenu.PrimaryButtons>
 
         <Controls:HamburgerMenu.SecondaryButtons>

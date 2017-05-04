@@ -132,6 +132,7 @@
     <Compile Include="Services\DataService\IDataConvertService.cs" />
     <Compile Include="Services\DataService\DataConverters\RedmineDataConverter.cs" />
     <Compile Include="Services\DataService\IDataService.cs" />
+    <Compile Include="Services\DataService\IDataSyncer.cs" />
     <Compile Include="Services\Network\INetworkDataService.cs" />
     <Compile Include="Services\Network\RedmineSpecific\IssueContainer.cs" />
     <Compile Include="Services\Network\RedmineSpecific\ProjectContainer.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="ViewModels\IssuesDetailsPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\DetailPageViewModel.cs" />
+    <Compile Include="ViewModels\PushPullUserControlViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\TrackListViewModel.cs" />
     <Compile Include="ViewModels\WorkTimePageViewModel.cs" />
@@ -162,6 +164,9 @@
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SyncPage.xaml.cs">
+      <DependentUpon>SyncPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ActuallyTrackingUserControl.xaml.cs">
       <DependentUpon>ActuallyTrackingUserControl.xaml</DependentUpon>
@@ -238,6 +243,10 @@
     <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SyncPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\ActuallyTrackingUserControl.xaml">
       <SubType>Designer</SubType>

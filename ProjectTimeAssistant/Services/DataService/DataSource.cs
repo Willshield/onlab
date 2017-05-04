@@ -11,7 +11,7 @@ using Windows.UI.Popups;
 namespace ProjectTimeAssistant.Services.DataService
 {
     //thread safe singleton
-    class DataSource : IDataService
+    class DataSource : IDataService, IDataSyncer
     {
         private static IDataConvertService dataConverter;
         private static DataSource instance = null;
@@ -176,12 +176,19 @@ namespace ProjectTimeAssistant.Services.DataService
 
         public void PushAll()
         {
-            throw new NotImplementedException();
-        }
-
-        public Issue GetActuallyTracked()
-        {
-            throw new NotImplementedException();
+            using (var db = new DataContext())
+            {
+                var wtList = db.WorkTimes.Include(wt => wt.Issue).Include(i => i.Issue.Project).OrderByDescending(i => i.StartTime).ToList();
+                foreach (var wt in wtList)
+                {
+                    if (wt.Dirty)
+                    {
+                        wt.Dirty = false;
+                        dataConverter.PostTimeEntryAsync(wt);
+                    }
+                }
+                db.SaveChanges();
+            }
         }
 
         public double GetAllWorkingTime(Issue issue)

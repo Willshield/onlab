@@ -11,6 +11,7 @@ namespace ProjectTimeAssistant.Services.DataService
     {
         Task<List<Issue>> GetIssues();
         Task<List<Project>> GetProjects();
-        Task<List<WorkTime>> GetTimeEntries();  
+        Task<List<WorkTime>> GetTimeEntries();
+        Task PostTimeEntryAsync(WorkTime wt);
     }
 }
