@@ -20,15 +20,10 @@ namespace ProjectTimeAssistant.ViewModels
         public static readonly int StartTimeKey = 2;
         public static readonly int HoursKey = 3;
         public static readonly int CommentKey = 4;
-
-        private ObservableCollection<WorkTime> list;
-        public ObservableCollection<WorkTime> List
-        {
-            get { return list; }
-            set { Set(ref list, value); }
-        }
-
-
+        public const int NoneKey = 0;
+        public const int DayKey = 1;
+        public const int WeekKey = 2;
+        public const int MonthKey = 3;
         IDataService DataService;
 
         public WorkTimePageViewModel()
@@ -47,6 +42,126 @@ namespace ProjectTimeAssistant.ViewModels
 
         }
 
+        private int selectedGroupBy;
+        public int SelectedGroupBy
+        {
+            get { return selectedGroupBy; }
+            set
+            {
+                Set(ref selectedGroupBy, value);
+                //OrderCatName = StartTimeKey; ToDo: disable order other cats?
+                //OrderCats(true);
+                GroupItemsBy();
+            }
+        }
+
+        private void GroupItemsBy()
+        {
+            if (selectedGroupBy != NoneKey)
+            {
+                ObservableCollection<WorkTime> newList = new ObservableCollection<WorkTime>();
+                WorkTime lastItem = new WorkTime();
+                lastItem = List[0];
+                switch (selectedGroupBy)
+                {
+                    case DayKey:
+                        newList.Add(CreateDummy(DayKey, lastItem.StartTime.Value.Date));
+                        foreach (var item in List)
+                        {
+                            if(lastItem.StartTime.Value.Date != item.StartTime.Value.Date)
+                            {
+                                newList.Add(CreateDummy(DayKey, item.StartTime.Value.Date));
+                            }
+                            newList.Add(item);
+                            lastItem = item;
+                        }
+                        break;
+                    case WeekKey:
+                        newList.Add(CreateDummy(WeekKey, lastItem.StartTime.Value.Date));
+                        foreach (var item in List)
+                        {
+                            int lastDayNum = (lastItem.StartTime.Value.DayOfWeek.GetHashCode() + 6) % 7;
+                            int itemDayNum = (lastItem.StartTime.Value.DayOfWeek.GetHashCode() + 6) % 7;
+                            var ts = lastItem.StartTime.Value.Subtract(item.StartTime.Value);
+                            if (ts.Days >= 7 || (lastDayNum > itemDayNum && ts.Days < 7))
+                            {
+                                newList.Add(CreateDummy(WeekKey, item.StartTime.Value.Date));
+                            }
+                            newList.Add(item);
+                            lastItem = item;
+                        }
+                        break;
+                    case MonthKey:
+                        newList.Add(CreateDummy(MonthKey, lastItem.StartTime.Value.Date));
+                        foreach (var item in List)
+                        {
+                            if ((lastItem.StartTime.Value.Date.Year == item.StartTime.Value.Date.Year && lastItem.StartTime.Value.Date.Month != item.StartTime.Value.Date.Month) 
+                             || (lastItem.StartTime.Value.Date.Year != item.StartTime.Value.Date.Year && lastItem.StartTime.Value.Date.Month != item.StartTime.Value.Date.Month) )
+                            {
+                                newList.Add(CreateDummy(MonthKey, item.StartTime.Value.Date));
+                            }
+                            newList.Add(item);
+                            lastItem = item;
+                        }
+                        break;
+                    default:
+                        return;
+                }
+                List = newList;
+
+            } else if (selectedGroupBy == NoneKey)
+            {
+                Refresh();
+            } 
+
+        }
+
+        private WorkTime CreateDummy(int GroupByCat, DateTime thisDate)
+        {
+            WorkTime dummy = new WorkTime();
+            dummy.Issue = new Issue();
+            dummy.Issue.Project = new Project();
+            switch (selectedGroupBy)
+            {
+                case DayKey:
+                    if (thisDate.Date == DateTime.Now.Date)
+                    {
+                        dummy.Issue.Subject = "Today:";
+                    }
+                    else
+                    {
+                        dummy.Issue.Subject = "On " + thisDate.Date.ToString() + ":";
+                    }
+                    break;
+                case WeekKey:
+                    //int lastdayNum = (lastDate.DayOfWeek.GetHashCode() + 1) % 7;
+                    int dayNum = (thisDate.DayOfWeek.GetHashCode() + 1) % 7;
+                    dummy.Issue.Subject = "On the week started on " + thisDate.Date.AddDays(-dayNum).ToString() + ":";
+                    break;
+                case MonthKey:
+                    if (thisDate.Date.Year == DateTime.Now.Year && thisDate.Date.Month == DateTime.Now.Month)
+                    {
+                        dummy.Issue.Subject = "This month:";
+                    }
+                    else
+                    {
+                        dummy.Issue.Subject = "On " + thisDate.Date.Year + "-" + thisDate.Date.Month + ":";
+                    }
+                    break;
+            }
+
+            return dummy;
+        }
+
+        private ObservableCollection<WorkTime> list;
+        public ObservableCollection<WorkTime> List
+        {
+            get { return list; }
+            set {
+                Set(ref list, value);
+                }
+        }
+        public WorkTime SelectedWorkTime { get; set; }
         public DelegateCommand StartTrackingCommand { get; }
         public async void StartTracking()
         {
@@ -56,12 +171,11 @@ namespace ProjectTimeAssistant.ViewModels
             await DataService.GetIssueById(SelectedWorkTime.IssueID).StartTracking(null);
             NavigationService.Navigate(typeof(Views.ActuallyTrackingPage));
         }
-        public WorkTime SelectedWorkTime { get; set; }
+        
+        
 
-        public readonly ObservableCollection<string> OrderingCats;
         public DelegateCommand RefreshCommand { get; }
         public DelegateCommand OrderCommand { get; }
-
         private int orderCatName;
         public int OrderCatName
         {
@@ -70,6 +184,7 @@ namespace ProjectTimeAssistant.ViewModels
         }
         public void OrderCats(bool byDesc)
         {
+            SelectedGroupBy = NoneKey;
             switch (OrderCatName)
             {
                 case 0:
@@ -109,8 +224,6 @@ namespace ProjectTimeAssistant.ViewModels
         public void Refresh()
         {
             List = DataService.GetWorkTimes();
-
-
         }
     }
 }

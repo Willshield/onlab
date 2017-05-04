@@ -58,7 +58,7 @@
                                FontSize="20" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Tapped="OrderData"/>
         </Grid>
 
-        <ListView Width="900" MaxHeight="550" SelectionMode="Single" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding List}" Grid.Row="3" Margin="0" SelectedItem="{Binding SelectedIssue, Mode=TwoWay}" HorizontalAlignment="Center">
+        <ListView Width="900" MaxHeight="550" SelectionMode="Single" VerticalAlignment="Top" ItemsSource="{Binding List}" Grid.Row="3" Margin="0" SelectedItem="{Binding SelectedIssue, Mode=TwoWay}" HorizontalAlignment="Center">
 
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:Issue" >

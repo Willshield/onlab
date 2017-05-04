@@ -35,13 +35,13 @@
         <!--header-->
         <usercontrols:TitledPageHeader Grid.Row="0" Label="Tracked worktimes" />
 
-        <!--<ComboBox x:Name="OrderByCombo" Grid.Row="1" Header="Order by:" Width="296" Height="70" SelectedIndex="{Binding SelectedItem, Mode=TwoWay}" SelectedItem="Recent" ItemsSource="{x:Bind OrderingCats}" VerticalAlignment="Center" Margin="20,0"/>-->
+        <ComboBox x:Name="GroupByCombo" Grid.Row="1" Header="Group by:" Width="296" Height="70" SelectedIndex="{Binding SelectedGroupBy, Mode=TwoWay}" ItemsSource="{x:Bind OrderingCats}" Margin="20,0"/>
         <!--<ScrollViewer VerticalScrollMode="Auto" Height="600" Grid.Row="1">
             <usercontrols:TrackList />
         </ScrollViewer>-->
 
         <!--table header-->
-        <Grid  Margin="0" Grid.Row="2" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" HorizontalAlignment="Left">
+        <Grid  Margin="0" Grid.Row="2" Background="{ThemeResource MenuFlyoutItemFocusedBackgroundThemeBrush}" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30"/>
                 <ColumnDefinition Width="210"/>
@@ -62,7 +62,7 @@
                                FontSize="20" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Tapped="OrderData"/>
         </Grid>
 
-        <ListView Width="900" MaxHeight="550" SelectionMode="Single" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding List}" Grid.Row="3" Margin="0" SelectedItem="{Binding SelectedWorkTime, Mode=TwoWay}">
+        <ListView Width="900" MaxHeight="550" SelectionMode="Single" HorizontalAlignment="Center" VerticalAlignment="Top" ItemsSource="{Binding List}" Grid.Row="3" Margin="0" SelectedItem="{Binding SelectedWorkTime, Mode=TwoWay}">
 
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:WorkTime" >
