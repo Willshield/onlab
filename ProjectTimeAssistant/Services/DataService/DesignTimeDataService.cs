@@ -35,6 +35,11 @@ namespace ProjectTimeAssistant.Services.DataService
             return 10.4;
         }
 
+        public ObservableCollection<WorkTime> GetDirtyWorkTimes()
+        {
+            return GetWorkTimes();
+        }
+
         public ObservableCollection<Issue> GetFavouriteIssues()
         {
             return GetIssues();

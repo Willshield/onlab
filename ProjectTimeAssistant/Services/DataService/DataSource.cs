@@ -225,5 +225,14 @@ namespace ProjectTimeAssistant.Services.DataService
                 return new ObservableCollection<Issue>(db.Issues.Where(i => i.IsFavourite).Include(i => i.Project).ToList());
             }
         }
+
+        public ObservableCollection<WorkTime> GetDirtyWorkTimes()
+        {
+            using (var db = new DataContext())
+            {
+                var wts = new ObservableCollection<WorkTime>(db.WorkTimes.Include(wt => wt.Issue).Where(wt => wt.Dirty).Include(i => i.Issue.Project).OrderByDescending(i => i.StartTime).ToList());
+                return wts;
+            }
+        }
     }
 }
