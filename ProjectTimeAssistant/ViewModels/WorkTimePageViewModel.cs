@@ -129,6 +129,7 @@ namespace ProjectTimeAssistant.ViewModels
         {
             WorkTime dummy = new WorkTime();
             dummy.Issue = new Issue();
+            dummy.IssueID = -1;
             dummy.Issue.Project = new Project();
             string align = "     ";
             switch (selectedGroupBy)

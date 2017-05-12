@@ -31,6 +31,8 @@ namespace ProjectTimeAssistant.Views
         {
             this.InitializeComponent();
 
+            WorkTimeListView.ContainerContentChanging += HighlightHeaders;
+
             OrderingCats = new ObservableCollection<string>
             {
                 "None", "Day", "Week", "Month"
@@ -74,6 +76,17 @@ namespace ProjectTimeAssistant.Views
             Hours.Opacity = 1;
             Comment.Opacity = 1;
         }
+
+        private void HighlightHeaders(ListViewBase sender, ContainerContentChangingEventArgs args)
+        {
+            WorkTime wt = args.Item as WorkTime;
+            if (wt.IssueID == -1)
+            {
+                args.ItemContainer.Background = Application.Current.Resources["SystemControlHighlightAccentBrush"] as SolidColorBrush;  //(SolidColorBrush)Application.Current.Resources["grey"];
+            }
+
+        }
+
 
     }
 }

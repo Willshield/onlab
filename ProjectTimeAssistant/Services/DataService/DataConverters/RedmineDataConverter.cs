@@ -62,10 +62,15 @@ namespace ProjectTimeAssistant.Services.DataService
         public async Task<List<WorkTime>> GetTimeEntries()
         {
             TimeEntriesContainer container = await networkService.GetTimeEntriesAsync();
-
+            //fixme!! container.total_count != container.time_entries.count; ?limit=## parameter needed where ## = total_count
             List<WorkTime> list = new List<WorkTime>();
-            for (int i = 0; i < container.total_count; i++)
+            for (int i = 0; i < container.time_entries.Length; i++)
             {
+                if (i == 20)
+                {
+                    int a = 10;
+                    a++;
+                }
                 Models.WorkTime tmp = new WorkTime();
                 tmp.WorkTimeID = container.time_entries[i].id;
                 tmp.Hours = container.time_entries[i].hours;

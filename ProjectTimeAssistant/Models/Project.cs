@@ -24,33 +24,9 @@ namespace ProjectTimeAssistant.Models
             set { description = value; }
         }
 
-        ////TODO: check issues if dirty?
-        //private bool dirty;
-        //public bool Dirty
-        //{
-        //    get { return dirty; }
-        //    set { dirty = value; }
-        //}
-
+        //todo:Subprojects
         public List<Issue> Issues { get; set; }
 
-        //public Project()
-        //{
-        //    //TODO: Init params
-
-        //    issuelist = new List<Issue>();
-        //}
-
-        //TODO
-        //public void addWorktime(Issue issue)
-        //{
-        //    issuelist.Add(issue);
-        //}
-
-        //public void clearWorktime()
-        //{
-        //    issuelist.Clear();
-        //}
 
     }
 }
