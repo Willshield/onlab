@@ -65,7 +65,9 @@ namespace ProjectTimeAssistant.Services.Network
 
         public async Task PostTimeEntry(Post_Time_Entry t)
         {
-            t.key = "4f56fb8188c5f48811efe9a47b7ef50ad3443318";
+            var sser = SettingsServices.SettingsService.Instance;
+            t.key = sser.UploadKey;
+            //t.key = "4f56fb8188c5f48811efe9a47b7ef50ad3443318";
             await PostTAsync<Post_Time_Entry>(new Uri(serverUrl, $"time_entries.json"), t);
         }
     }

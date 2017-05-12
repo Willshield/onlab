@@ -80,7 +80,20 @@ namespace ProjectTimeAssistant.Services.SettingsServices
         /// <summary>
         /// saját hozzáadások
         /// </summary>
-        public Models.Profile Profile { get; set; }
+        public Models.Profile Profile
+        {
+            get
+            {
+                string name = _helper.Read<string>("ProfileName", "Gáspár Vilmos");
+                string url = _helper.Read<string>("URL", "Gáspár Vilmos");
+                return new Models.Profile() { Name = name, Url = url };
+            }
+            set
+            {
+                _helper.Write("ProfileName", value.Name);
+                _helper.Write("URL", value.Url);
+            }
+        }
 
         public int Rounding
         {
@@ -103,6 +116,12 @@ namespace ProjectTimeAssistant.Services.SettingsServices
         {
             get { return _helper.Read<bool>(nameof(AlwaysUp), true); }
             set { _helper.Write(nameof(AlwaysUp), value); }
+        }
+
+        public string UploadKey
+        {
+            get { return _helper.Read<string>(nameof(UploadKey), "4f56fb8188c5f48811efe9a47b7ef50ad3443318"); }
+            set { _helper.Write(nameof(UploadKey), value); }
         }
         
 

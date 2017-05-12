@@ -9,7 +9,10 @@
     xmlns:vm="using:ProjectTimeAssistant.ViewModels"
     xmlns:usercontrols="using:ProjectTimeAssistant.Views.UserControls"
     mc:Ignorable="d">
-
+    
+    <Page.DataContext>
+        <vm:ProfileViewModel x:Name="ViewModel" />
+    </Page.DataContext>
     <Grid Margin="75,5,10,5" Canvas.ZIndex="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
@@ -32,15 +35,15 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Your name:" Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" Opacity=".6" MaxLines="1" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="0" Grid.Column="1" Name="NameTb"  Width="200" Height="30" Margin="20,0"/>
+            <TextBox Text="{Binding ProfileName, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" Name="NameTb"  Width="200" Height="30" Margin="20,0"/>
 
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Connection url:" Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" Opacity=".6" MaxLines="1" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Name="URLTb"  Width="200" Height="30" Margin="20,0"/>
+            <TextBox Text="{Binding URL, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" Name="URLTb"  Width="200" Height="30" Margin="20,0"/>
 
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Connection key:" Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" Opacity=".6" MaxLines="1" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Name="KeyTb"  Width="200" Height="30" Margin="20,0"/>
+            <PasswordBox Password="{Binding Key, Mode=TwoWay}" PasswordRevealMode="Peek" Grid.Row="2" Grid.Column="1" Name="KeyTb"  Width="200" Height="30" Margin="20,0"/>
 
-            <Button Grid.Row="3" Grid.Column="1" Content="Save" HorizontalAlignment="Right" Margin="20,0"/>
+            <Button Grid.Row="3" Grid.Column="1" Content="Save" HorizontalAlignment="Right" Margin="20,0" Command="{Binding SaveCommand}"/>
 
         </Grid>
 
