@@ -41,7 +41,7 @@
                     <ColumnDefinition Width="135"/>
                     <ColumnDefinition Width="135"/>
                     <ColumnDefinition Width="6"/>
-                    <ColumnDefinition Width="499"/>
+                    <ColumnDefinition Width="399"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Tapped="OrderData" Name="Subject" Text="Subject" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
                                FontSize="20" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
@@ -76,13 +76,14 @@
                     
                     <controls:MasterDetailsView.DetailsTemplate>
                         <DataTemplate>
-                            <Grid Margin="24">
+                            <Grid Margin="24" MinWidth="350">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30"/>
                                     <RowDefinition Height="30"/>
                                     <RowDefinition Height="30"/>
                                     <RowDefinition Height="30"/>
                                     <RowDefinition Height="100"/>
+                                    <RowDefinition Height="60"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <StackPanel Orientation="Horizontal" Grid.Row="0">
@@ -103,17 +104,7 @@
                                 </ScrollViewer>
                                 <ToggleSwitch IsOn="{Binding FavouriteSetter, Mode=TwoWay}" Header="Favourite" Padding="0"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="5" />
 
-                                <!--<Button Width="150" Height="32" Padding="0"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="5">
-                                    <Grid Width="150" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="5">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="32" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <SymbolIcon Grid.Column="0" Symbol="Favorite" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" />
-                                        <TextBlock Grid.Column="1" Text="Set as favourite" FontSize="16" VerticalAlignment="Center" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" />
-                                    </Grid>
-                                </Button>-->
-                                <Button Content="Start tracking" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="5" Command="{Binding TrackingCommand}"/>
+                                <Button Content="Start tracking" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Grid.Row="5" Command="{Binding TrackingCommand}"/>
                             </Grid>
                         </DataTemplate>
                     </controls:MasterDetailsView.DetailsTemplate>

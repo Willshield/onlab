@@ -14,7 +14,7 @@ namespace ProjectTimeAssistant.Services.SettingsServices
             _helper = new Template10.Services.SettingsService.SettingsHelper();
 
             //todo: load it
-            Profile = new Models.Profile() { Name = "Gáspár Vilmos", Url = "onlab.m.redmine.org" };
+            //Profile = new Models.Profile() { Name = "Gáspár Vilmos", Url = "onlab.m.redmine.org" };
         }
 
         public bool UseShellBackButton
